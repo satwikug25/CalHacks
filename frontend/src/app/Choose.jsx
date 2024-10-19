@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './css/Choose.css';
 
-const Choose =() => {
+const Choose = () => {
   const navigate = useNavigate();
 
   const handleAnalyze = () => {
