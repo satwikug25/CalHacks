@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
+import { Button } from '@chakra-ui/react'
+import './css/Train.css';  // Import the CSS file
 
 // sample will give from backend
 
@@ -79,23 +81,28 @@ const ChessGame = () => {
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>Chess Game</h1>
-            <p>Current turn: {currentTurn === 'w' ? 'White' : 'Black'}</p>
-            <p>Sample: {sampleIndex + 1} / {samples.length}</p>
-            <Chessboard
-                position={game.fen()}
-                onPieceDrop={(sourceSquare, targetSquare) => {
-                    const move = `${sourceSquare}${targetSquare}`;
-                    makeMove(move);
-                }}
-            />
-            <div>
-                <button onClick={prevSample}>Previous Sample</button>
-                <button onClick={resetGame}>Reset Game</button>
-                <button onClick={nextSample}>Next Sample</button>
+        <div className="chess-game-container">
+            <h1 className="chess-game-title">Cutomized Puzzles</h1>
+            <div className="game-info">
+                <p>Current turn: {currentTurn === 'w' ? 'White' : 'Black'}</p>
+                <p>Sample: {sampleIndex + 1} / {samples.length}</p>
+            </div>
+            <div className="chessboard-wrapper">
+                <Chessboard
+                    position={game.fen()}
+                    onPieceDrop={(sourceSquare, targetSquare) => {
+                        const move = `${sourceSquare}${targetSquare}`;
+                        makeMove(move);
+                    }}
+                />
+            </div>
+            <div className="button-group">
+                <Button colorScheme='blue' onClick={prevSample}>Previous Sample</Button>
+                <Button colorScheme='green' onClick={resetGame}>Reset Game</Button>
+                <Button colorScheme='blue' onClick={nextSample}>Next Sample</Button>
             </div>
             <input
+                className="move-input"
                 type="text"
                 placeholder="Enter move"
                 onKeyDown={(e) => {
@@ -105,7 +112,7 @@ const ChessGame = () => {
                     }
                 }}
             />
-            {message && <p>{message}</p>}
+            {message && <p className="message">{message}</p>}
         </div>
     );
 };

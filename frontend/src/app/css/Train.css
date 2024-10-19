@@ -1,0 +1,88 @@
+.chess-game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chess-game-title {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #34495e;
+  }
+  
+  .chessboard-wrapper {
+    margin-bottom: 20px;
+    border: 5px solid #2c3e50;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .button-group button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+  }
+  
+  .button-group button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .button-group button:active {
+    transform: translateY(0);
+  }
+  
+  .move-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .message {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 600px) {
+    .chess-game-container {
+      padding: 10px;
+    }
+  
+    .chess-game-title {
+      font-size: 2rem;
+    }
+  
+    .button-group {
+      flex-direction: column;
+    }
+  
+    .button-group button {
+      width: 100%;
+    }
+  }
