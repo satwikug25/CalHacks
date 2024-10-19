@@ -7,16 +7,11 @@ const Search = () => {
   const [game, setGame] = useState(new Chess());
   const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
   const [games, setGames] = useState([]);
-  const [currentGameIndex, setCurrentGameIndex] = useState(0);
   const [query, setQuery] = useState('');
 
-  useEffect(() => {
-    if (games.length > 0) {
-      resetGame();
-    }
-  }, [currentGameIndex, games]);
 
   const resetGame = () => {
+    console.log('Resetting game');
     setGame(new Chess());
     setCurrentMoveIndex(0);
   };
@@ -25,9 +20,14 @@ const Search = () => {
     try {
       const response = await axios.post('http://localhost:8081/search', { query });
       const searchResults = response.data;
+      console.log('Received search results:', searchResults);
       if (searchResults && searchResults.length > 0) {
-        setGames(searchResults);
-        setCurrentGameIndex(0);
+        const initializedGames = searchResults.map(game => ({
+          ...game,
+          game: new Chess(),
+          currentMoveIndex: 0
+        }));
+        setGames(initializedGames);
       } else {
         setGames([]);
       }
@@ -37,19 +37,50 @@ const Search = () => {
     }
   };
 
-  const handleNextMove = () => {
-    const currentGame = games[currentGameIndex];
+  const handleNextMove = (gameIndex) => {
+    if (gameIndex >= games.length) return;
+
+    const currentGame = games[gameIndex];
     const moves = Array.isArray(currentGame.moves) ? currentGame.moves : parsePGN(currentGame.moves);
-    
-    if (currentMoveIndex < moves.length) {
-      const newGame = new Chess(game.fen());
+
+    if (currentGame.currentMoveIndex < moves.length) {
+      const newGame = new Chess(currentGame.game.fen());
       try {
-        newGame.move(moves[currentMoveIndex]);
-        setGame(newGame);
-        setCurrentMoveIndex(currentMoveIndex + 1);
+        const move = moves[currentGame.currentMoveIndex];
+        console.log(`Attempting move for game ${gameIndex}:`, move);
+        newGame.move(move);
+        const updatedGames = [...games];
+        updatedGames[gameIndex] = {
+          ...currentGame,
+          game: newGame,
+          currentMoveIndex: currentGame.currentMoveIndex + 1
+        };
+        setGames(updatedGames);
       } catch (error) {
-        console.error('Invalid move:', moves[currentMoveIndex]);
+        console.error('Invalid move:', move, error);
       }
+    }
+  };
+
+  const handlePreviousMove = (gameIndex) => {
+    if (gameIndex >= games.length) return;
+
+    const currentGame = games[gameIndex];
+    if (currentGame.currentMoveIndex > 0) {
+      const moves = Array.isArray(currentGame.moves) ? currentGame.moves : parsePGN(currentGame.moves);
+
+      // Replay moves up to currentMoveIndex - 1
+      const newGame = new Chess();
+      for (let i = 0; i < currentGame.currentMoveIndex - 1; i++) {
+        newGame.move(moves[i]);
+      }
+      const updatedGames = [...games];
+      updatedGames[gameIndex] = {
+        ...currentGame,
+        game: newGame,
+        currentMoveIndex: currentGame.currentMoveIndex - 1
+      };
+      setGames(updatedGames);
     }
   };
 
@@ -64,24 +95,6 @@ const Search = () => {
     return moves;
   };
 
-  const handleNextGame = () => {
-    setCurrentGameIndex((prevIndex) => {
-      const newIndex = (prevIndex + 1) % games.length;
-      resetGame();
-      return newIndex;
-    });
-  };
-
-  const handlePreviousGame = () => {
-    setCurrentGameIndex((prevIndex) => {
-      const newIndex = (prevIndex - 1 + games.length) % games.length;
-      resetGame();
-      return newIndex;
-    });
-  };
-
-  const currentGame = games[currentGameIndex];
-
   return (
     <div>
       <div>
@@ -93,28 +106,38 @@ const Search = () => {
         />
         <button onClick={handleSearchCall}>Search</button>
       </div>
-      
+
       {games.length > 0 ? (
-        <div>
-          <h1>Chess Game ({currentGameIndex + 1} of {games.length})</h1>
-          <div>
-            <h2>White: {currentGame.white} (ELO: {currentGame.whiteElo})</h2>
-            <h2>Black: {currentGame.black} (ELO: {currentGame.blackElo})</h2>
-          </div>
-          <div style={{ width: '400px', margin: '0 auto' }}>
-            <Chessboard position={game.fen()} />
-          </div>
-          <div>
-            <h3>Current Move: {currentMoveIndex + 1}</h3>
-            <p>{Array.isArray(currentGame.moves) ? currentGame.moves[currentMoveIndex] : 'Move'}</p>
-            {currentMoveIndex < (Array.isArray(currentGame.moves) ? currentGame.moves.length : parsePGN(currentGame.moves).length) ? (
-              <button onClick={handleNextMove}>Next Move</button>
-            ) : (
-              <p>Game Over! Result: {currentGame.result}</p>
-            )}
-            <button onClick={handlePreviousGame}>Previous Game</button>
-            <button onClick={handleNextGame}>Next Game</button>
-          </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {games.map((game, index) => (
+            <div key={index} style={{ margin: '20px', maxWidth: '400px' }}>
+              <h2>Chess Game {index + 1}</h2>
+              <h3>White: {game.white} (ELO: {game.whiteElo})</h3>
+              <h3>Black: {game.black} (ELO: {game.blackElo})</h3>
+              <div style={{ width: '300px', margin: '0 auto' }}>
+                <Chessboard position={game.game.fen()} />
+              </div>
+              <div>
+                <h4>Current Move: {game.currentMoveIndex}</h4>
+                <p>
+                  {game.currentMoveIndex < game.moves.length &&
+                    `Next move: ${game.moves[game.currentMoveIndex]}`}
+                </p>
+                <button onClick={() => handlePreviousMove(index)} disabled={game.currentMoveIndex === 0}>
+                  Previous Move
+                </button>
+                <button
+                  onClick={() => handleNextMove(index)}
+                  disabled={game.currentMoveIndex >= game.moves.length}
+                >
+                  Next Move
+                </button>
+                {game.currentMoveIndex >= game.moves.length && (
+                  <p>Game Over! Result: {game.result}</p>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       ) : (
         <p>No games found. Please search for games.</p>

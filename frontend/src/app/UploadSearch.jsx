@@ -13,12 +13,15 @@ function UploadSearch() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log('Input changed:', name, value); 
     if (name === 'moves') {
+      console.log(value.split(',').map(move => move.trim()));
       setGameData(prevData => ({
         ...prevData,
-        [name]: value.split(',').map(move => move.trim())
+        'moves': value.split(',').map(move => move.trim())
       }));
-    } else {
+    } 
+    else {
       setGameData(prevData => ({
         ...prevData,
         [name]: value
@@ -27,6 +30,7 @@ function UploadSearch() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(gameData);
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8081/upload', gameData);

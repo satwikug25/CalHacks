@@ -19,7 +19,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 let collection;
 (async () => {
-  collection = await chroma.createCollection({
+  collection = await chroma.getOrCreateCollection({
     name: "chess_games",
     embeddingFunction: new OpenAIEmbeddingFunction({ openai_api_key: process.env.GEMINI_API_KEY })
   });
@@ -53,9 +53,8 @@ app.post('/upload', async (req, res) => {
     const game = req.body;
     const description = await generateDescription(game);
     const fullGame = { ...game, description };
+    console.log(description);
     const embedding = await embedText(JSON.stringify(fullGame));
-
-    console.log('Embedding:', embedding); // Add this line for debugging
 
     await collection.add({
       ids: [game.id || Date.now().toString()],
@@ -75,21 +74,23 @@ app.post('/search', async (req, res) => {
   try {
     const { query } = req.body;
     const queryEmbedding = await embedText(query);
-    
+
     const results = await collection.query({
       queryEmbeddings: [queryEmbedding],
-      nResults: 2
+      nResults: 5
     });
 
-    const formattedResults = results.metadatas[0].map(game => ({
+    const formattedResults = results.documents[0].map(game => {
+      game = JSON.parse(game);
+      return ({
       white: game.white,
       black: game.black,
       whiteElo: game.whiteElo,
       blackElo: game.blackElo,
       result: game.result,
-      moves: game.moves,
+      moves: game.moves || '',
       description: game.description
-    }));
+    })});
 
     res.json(formattedResults);
   } catch (error) {
