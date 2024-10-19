@@ -13,12 +13,17 @@ function UploadSearch() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log('Input changed:', name, value); 
+    console.log('Input changed:', name, value);
     if (name === 'moves') {
-      console.log(value.split(',').map(move => move.trim()));
+      const cleanedMoves = value
+        .replace(/\d+\./g, '')  // Remove move numbers
+        .replace(/\n/g, ' ')    // Replace newlines with spaces
+        .split(/\s+/)           // Split by whitespace
+        .filter(move => move.trim() !== '');  // Remove empty strings
+      console.log("lof", cleanedMoves);
       setGameData(prevData => ({
         ...prevData,
-        'moves': value.split(',').map(move => move.trim())
+        'moves': cleanedMoves
       }));
     } 
     else {

@@ -45,6 +45,7 @@ async function generateDescription(game) {
   ${JSON.stringify(game, null, 2)}`;
 
   const result = await model.generateContent(prompt);
+  console.log(result.response.text());
   return result.response.text();
 }
 
@@ -77,7 +78,7 @@ app.post('/search', async (req, res) => {
 
     const results = await collection.query({
       queryEmbeddings: [queryEmbedding],
-      nResults: 5
+      nResults: 9
     });
 
     const formattedResults = results.documents[0].map(game => {

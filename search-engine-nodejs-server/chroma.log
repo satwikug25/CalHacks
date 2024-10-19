@@ -329,3 +329,30 @@
 [32mINFO[0m:     [19-10-2024 14:07:04] ::1:49579 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
 [33mWARNING[0m:  [19-10-2024 14:10:56] Number of requested results 5 is greater than number of elements in index 4, updating n_results = 4
 [32mINFO[0m:     [19-10-2024 14:10:56] ::1:49617 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:14:55] ::1:49649 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:14:55] ::1:49650 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 14:14:55] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 14:14:55] ::1:49649 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:17:23] ::1:49669 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:17:23] ::1:49670 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 14:17:23] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 14:17:23] ::1:49669 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:21:20] ::1:49726 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 14:21:47] Number of requested results 9 is greater than number of elements in index 5, updating n_results = 5
+[32mINFO[0m:     [19-10-2024 14:21:47] ::1:49737 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:23:10] ::1:49748 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 14:24:08] Number of requested results 9 is greater than number of elements in index 6, updating n_results = 6
+[32mINFO[0m:     [19-10-2024 14:24:08] ::1:49760 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:24:58] ::1:49766 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 14:25:09] Number of requested results 9 is greater than number of elements in index 7, updating n_results = 7
+[32mINFO[0m:     [19-10-2024 14:25:09] ::1:49774 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:27:09] ::1:49810 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 14:27:15] Number of requested results 9 is greater than number of elements in index 8, updating n_results = 8
+[32mINFO[0m:     [19-10-2024 14:27:15] ::1:49814 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[33mWARNING[0m:  [19-10-2024 14:28:44] Number of requested results 9 is greater than number of elements in index 8, updating n_results = 8
+[32mINFO[0m:     [19-10-2024 14:28:44] ::1:50111 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[33mWARNING[0m:  [19-10-2024 14:29:42] Number of requested results 9 is greater than number of elements in index 8, updating n_results = 8
+[32mINFO[0m:     [19-10-2024 14:29:42] ::1:50371 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:30:57] ::1:50685 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 14:31:09] ::1:50747 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 14:44:55] ::1:52928 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
