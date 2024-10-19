@@ -7,18 +7,20 @@ import secrets
 from methods import getGames
 from groq import Groq
 import json
+from flask_cors import CORS
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})  
 client_id = 'chessicle.com'
-port = 3000
+port = 5000
 
 username = ""
 
 groq_client = Groq(api_key=os.environ["GROQ_API_KEY"])
-from dotenv import load_dotenv
-load_dotenv()
+
 # Function to base64url encode
 def base64url_encode(data):
     return base64.urlsafe_b64encode(data).rstrip(b'=').decode('utf-8')
@@ -78,61 +80,98 @@ def callback():
     headers = {'Authorization': f'Bearer {access_token}'}
     user_info_response = requests.get(user_info_url, headers=headers)
     user_info = user_info_response.json()
-    username = user_info["username"]
-    session['username'] = username
+    
 
     # Redirect back to the React frontend with the username
     return redirect(f'http://localhost:5173/choose?username={user_info["username"]}')
 
-@app.route('/train')
+@app.get('/train')
 def train():
-    username = session.get('username')
+    username = request.args.get('username')
     if not username:
         return jsonify({"error": "User not logged in"}), 401
 
     games = getGames(username)
-    feedback = get_llama_feedback(games)
+    feedback = get_llama_feedback(games,username)
     return jsonify(feedback)
 
-def get_llama_feedback(games):
-    prompt = f"""
-    Analyze the following chess games and provide feedback:
-    1. Suggest 3-5 themes of puzzles that would help improve the player's skills.
-    2. Provide a brief overall assessment of the player's games.
+def get_llama_feedback(games, username):
+    groq_api_key = os.environ.get('GROQ_API_KEY')
+    if not groq_api_key:
+        raise ValueError("GROQ_API_KEY is not set in environment variables")
 
-    Games data:
+    groq_client = Groq(api_key=groq_api_key)
+
+    # Use a model that exists and you have access to
+    model = "llama-3.1-70b-versatile"  # or another model you have access to
+
+    puzzle_categories = [
+        "advancedPawn", "advantage", "anastasiaMate", "arabianMate", "attackingF2F7",
+        "attraction", "backRankMate", "bishopEndgame", "bodenMate", "castling",
+        "capturingDefender", "crushing", "doubleBishopMate", "dovetailMate", "equality",
+        "kingsideAttack", "clearance", "defensiveMove", "deflection", "discoveredAttack",
+        "doubleCheck", "endgame", "exposedKing", "fork", "hangingPiece", "hookMate",
+        "interference", "intermezzo", "knightEndgame", "mate", "mateIn1", "mateIn2",
+        "mateIn3", "mateIn4", "mateIn5", "middlegame", "opening", "pawnEndgame", "pin",
+        "promotion", "queenEndgame", "queenRookEndgame", "queensideAttack", "quietMove",
+        "rookEndgame", "sacrifice", "skewer", "smotheredMate", "trappedPiece",
+        "underPromotion", "xRayAttack", "zugzwang"
+    ]
+
+    prompt = f"""
+    Analyze the following chess game played by {username} and provide detailed, personalized feedback:
+
+    Game data:
     {games}
+
+    Please provide feedback in the following format:
+    1. Opening Analysis: Comment on the player's opening choices and early game strategy.
+    2. Middlegame Evaluation: Assess the player's tactical and positional play during the middlegame.
+    3. Endgame Performance: Evaluate how the player handled the endgame, if applicable.
+    4. Strengths: Highlight 2-3 aspects of {username}'s play that were particularly strong.
+    5. Areas for Improvement: Suggest 2-3 specific areas where {username} could focus on improving.
+    6. Recommended Themes: Propose 3-5 puzzle themes or study areas that would benefit {username}'s chess skills based on this game. Choose from the following categories:
+    {', '.join(puzzle_categories)}
 
     Please format your response as JSON with the following structure:
     {{
-        "themes": ["theme1", "theme2", "theme3"],
-        "feedback": "Your overall assessment here"
+        "opening_analysis": "Your analysis here",
+        "middlegame_evaluation": "Your evaluation here",
+        "endgame_performance": "Your evaluation here",
+        "strengths": ["Strength 1", "Strength 2", "Strength 3"],
+        "areas_for_improvement": ["Area 1", "Area 2", "Area 3"],
+        "recommended_themes": ["Theme 1", "Theme 2", "Theme 3", "Theme 4", "Theme 5"]
     }}
+
+    Ensure that the recommended_themes are chosen from the provided puzzle categories list.
     """
 
-    response = groq_client.chat.completions.create(
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a chess analysis AI. Provide insightful feedback based on the given games."
-            },
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        model="llama2-70b-4096",
-        max_tokens=1000,
-        temperature=0.7,
-    )
-
-    # Parse the JSON response
     try:
-        feedback_json = json.loads(response.choices[0].message.content)
-        return feedback_json
-    except json.JSONDecodeError:
-        # If parsing fails, return an error message
-        return {"error": "Failed to parse AI response"}
+        response = groq_client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert chess analyst providing personalized feedback to players."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.7,
+            max_tokens=1000,
+            top_p=1,
+            stream=False,
+            stop=None
+        )
+        print(response.choices[0].message.content)
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error in get_llama_feedback: {str(e)}")
+        return f"An error occurred while generating feedback: {str(e)}"
+
+    
 
     
 

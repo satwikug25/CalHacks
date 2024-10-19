@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
 import { Button } from '@chakra-ui/react'
@@ -27,10 +27,20 @@ const ChessGame = () => {
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
     const [message, setMessage] = useState('');
     const [currentTurn, setCurrentTurn] = useState(game.turn());
+    const username = localStorage.getItem('username');
+    
+    const fetchTrainingData = async () => {
+        const response = await fetch(`http://localhost:5000/train?username=${username}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+    };
+
+    console.log(fetchTrainingData());
 
     const handleMove = (move) => {
         const currentMove = samples[sampleIndex].moves[currentMoveIndex];
-
         if (move === currentMove) {
             if (game.turn() !== currentTurn) {
                 setMessage(`It's not your turn! Current turn: ${currentTurn === 'w' ? 'White' : 'Black'}`);

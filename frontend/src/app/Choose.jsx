@@ -1,9 +1,10 @@
-import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React,{useEffect} from 'react';
+import { useNavigate, Link , useLocation} from 'react-router-dom';
 import './css/Choose.css';
 
 const Choose =() => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleAnalyze = () => {
     navigate('/analyze');
@@ -12,6 +13,14 @@ const Choose =() => {
   const handleTrain = () => {
     navigate('/train');
   };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const username = searchParams.get('username');
+    if (username) {
+      localStorage.setItem('username', username);
+    }
+  }, [location, navigate]);
 
   return (
     <div className="container">

@@ -1,3 +1,4 @@
+from flask import jsonify
 import requests
 import json
 
@@ -20,11 +21,14 @@ def getGames(username):
     response = requests.get(url, headers=headers, params=params)
     
     # Get the raw text response
-    games = response.json()
+    games = response.text.split('\n')
+
+    # with open("t.json", "w") as f:
+    #     f.write(games)
     
-    # Split the text into lines and parse each line as JSON
-    
-    
-    return
+    print(games)
+
+    return games
+
 
 
