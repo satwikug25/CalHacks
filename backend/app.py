@@ -9,6 +9,7 @@ from groq import Groq
 import json
 from flask_cors import CORS
 from dotenv import load_dotenv
+import urllib.parse
 load_dotenv()
 
 app = Flask(__name__)
@@ -85,15 +86,45 @@ def callback():
     # Redirect back to the React frontend with the username
     return redirect(f'http://localhost:5173/choose?username={user_info["username"]}')
 
-@app.get('/train')
-def train():
+@app.get('/analyze_and_get_puzzles')
+def analyze_and_get_puzzles():
     username = request.args.get('username')
     if not username:
-        return jsonify({"error": "User not logged in"}), 401
+        return jsonify({"error": "Username is required"}), 400
 
-    games = getGames(username)
-    feedback = get_llama_feedback(games,username)
-    return jsonify(feedback)
+    try:
+        # First, get the analysis from the /train endpoint
+        games = getGames(username)
+        feedback = get_llama_feedback(games,username)
+        
+        # Extract recommended themes from the analysis
+        recommended_themes = json.loads(feedback).get('recommended_themes', [])
+        
+        # Use these themes to fetch puzzles
+        puzzles = get_puzzles(recommended_themes)
+        
+        print({
+            "analysis": feedback,
+            "puzzles": puzzles
+        })
+        return jsonify({
+            "analysis": feedback,
+            "puzzles": puzzles
+        })
+    except Exception as e:
+        print(f"Error in analyze_and_get_puzzles: {str(e)}")
+        return jsonify({"error": "An error occurred while processing your request"}), 500
+
+
+# @app.get('/train')
+# def train():
+#     username = request.args.get('username')
+#     if not username:
+#         return jsonify({"error": "User not logged in"}), 401
+
+#     games = getGames(username)
+#     feedback = get_llama_feedback(games,username)
+#     return jsonify(feedback)
 
 def get_llama_feedback(games, username):
     groq_api_key = os.environ.get('GROQ_API_KEY')
@@ -143,7 +174,7 @@ def get_llama_feedback(games, username):
         "recommended_themes": ["Theme 1", "Theme 2", "Theme 3", "Theme 4", "Theme 5"]
     }}
 
-    Ensure that the recommended_themes are chosen from the provided puzzle categories list.
+    Ensure that the recommended_themes are chosen from the provided puzzle categories list and only return the JSON and nothing else
     """
 
     try:
@@ -170,10 +201,39 @@ def get_llama_feedback(games, username):
     except Exception as e:
         print(f"Error in get_llama_feedback: {str(e)}")
         return f"An error occurred while generating feedback: {str(e)}"
-
     
+def get_puzzles(themes, rating='1500', count='25', max_retries=3, initial_delay=1):
+    url = "https://chess-puzzles.p.rapidapi.com/"
+    headers = {
+        'x-rapidapi-key': os.environ['RAPIDAPI_KEY'],
+        'x-rapidapi-host': "chess-puzzles.p.rapidapi.com"
+    }
+    all_puzzles = []
 
-    
+    for theme in themes:
+        querystring = {
+            "themes": json.dumps([theme]),
+            "rating": rating,
+            "themesType": "ALL",
+            "count": count
+        }
+        print(f"Fetching puzzles for theme: {theme}")
+        
+        try:
+            response = requests.get(url, headers=headers, params=querystring)
+            response.raise_for_status()
+            puzzles_json = json.loads(response.text)
+            all_puzzles.append(puzzles_json['puzzles'])
+            # ... (error handling code remains the same)
+        except requests.exceptions.RequestException as e:
+            if e.response.status_code == 400:
+                print(f"Ignoring 400 error for theme: {theme}")
+                continue
+            else:
+                raise
+
+    print(f"Total puzzles fetched: {len(all_puzzles)}")
+    return all_puzzles[0]
 
 if __name__ == '__main__':
     app.run(port=port)

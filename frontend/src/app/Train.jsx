@@ -30,7 +30,7 @@ const ChessGame = () => {
     const username = localStorage.getItem('username');
     
     const fetchTrainingData = async () => {
-        const response = await fetch(`http://localhost:5000/train?username=${username}`);
+        const response = await fetch(`http://localhost:5000/analyze_and_get_puzzles?username=${username}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
