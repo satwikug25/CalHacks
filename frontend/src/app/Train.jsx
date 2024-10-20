@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
+
 import './css/Train.css';
 
 const ChessGame = () => {
@@ -11,6 +12,8 @@ const ChessGame = () => {
     const [message, setMessage] = useState('');
     const [moveHistory, setMoveHistory] = useState([]);
     const [userColor, setUserColor] = useState('w');
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [moveInput, setMoveInput] = useState('');
     const username = localStorage.getItem('username');
 
     const fetchTrainingData = async () => {
@@ -33,30 +36,71 @@ const ChessGame = () => {
             setPuzzles(fetchedPuzzles);
             if (fetchedPuzzles.length > 0) {
                 initializeGame(fetchedPuzzles[0]);
+            } else {
+                setMessage('No puzzles available. Please try again later.');
             }
         };
         loadPuzzles();
     }, []);
 
     const initializeGame = useCallback((puzzle) => {
+        if (!puzzle) {
+            console.error('No puzzle available to initialize the game.');
+            setMessage('No puzzles available. Please try again later.');
+            return;
+        }
+
         const newGame = new Chess(puzzle.fen);
+        const activeColor = newGame.turn();
+        const newUserColor = activeColor === 'w' ? 'b' : 'w';
+        setUserColor(newUserColor);
         setGame(newGame);
         setCurrentMoveIndex(0);
         setMoveHistory([]);
-        // Determine user's color based on whose turn it is in the initial position
-        const newUserColor = newGame.turn() === 'w' ? 'w' : 'b';
-        setUserColor(newUserColor);
-        setMessage(newUserColor === 'w' ? 'Make your move!' : 'Wait for opponent\'s move...');
         
-        // If it's not the user's turn, make the computer's move
-        if (newUserColor !== newGame.turn()) {
-            setTimeout(() => makeComputerMove(newGame, [], 0), 500);
+        if (newUserColor === 'b') {
+            setMessage("This is the initial position. Watch the computer's move...");
+            setTimeout(() => makeComputerMove(newGame, [], 0, puzzle), 1000);
+        } else {
+            setMessage("Your turn to solve the puzzle!");
         }
+
+        console.log('Initialized game:', newGame.fen(), 'User color:', newUserColor);
     }, []);
 
+    const animateComputerMoves = (currentGame, moves) => {
+        setIsAnimating(true);
+        let moveIndex = 0;
+
+        const animateMove = () => {
+            if (moveIndex < moves.length) {
+                const move = moves[moveIndex];
+                const newGame = new Chess(currentGame.fen());
+                newGame.move(move);
+                setGame(newGame);
+                setMoveHistory(prevHistory => [...prevHistory, move]);
+                setCurrentMoveIndex(moveIndex + 1);
+                console.log('Computer move made:', move, 'New FEN:', newGame.fen());
+
+                moveIndex++;
+                setTimeout(animateMove, 1000);
+            } else {
+                setIsAnimating(false);
+                setMessage('Your turn to solve the puzzle!');
+            }
+        };
+
+        animateMove();
+    };
+
     const handleMove = (move) => {
+        if (isAnimating || game.turn() !== userColor) return;
+
+        console.log('Attempting move:', move);
         const currentPuzzle = puzzles[currentPuzzleIndex];
         const expectedMove = currentPuzzle.moves[currentMoveIndex];
+
+        console.log('Expected move:', expectedMove);
 
         if (move === expectedMove) {
             const newGame = new Chess(game.fen());
@@ -66,27 +110,28 @@ const ChessGame = () => {
             setGame(newGame);
             setCurrentMoveIndex(prevIndex => prevIndex + 1);
             setMoveHistory(newMoveHistory);
-            setMessage('Correct! Opponent is moving...');
 
-            // Check if there are more moves in the puzzle
+            console.log('Correct move made. New FEN:', newGame.fen());
+
             if (currentMoveIndex + 1 < currentPuzzle.moves.length) {
-                // Make the computer's move
+                setMessage('Correct! Opponent is thinking...');
                 setTimeout(() => makeComputerMove(newGame, newMoveHistory, currentMoveIndex + 1), 500);
             } else {
                 showCongratulations();
             }
         } else {
             setMessage('Incorrect move. Try again!');
-            // Revert to previous state
-            const newGame = new Chess();
-            newGame.load(game.fen());
-            moveHistory.forEach(historyMove => newGame.move(historyMove));
-            setGame(newGame);
+            console.log('Incorrect move. Expected:', expectedMove, 'Got:', move);
         }
     };
 
-    const makeComputerMove = (currentGame, currentMoveHistory, moveIndex) => {
-        const currentPuzzle = puzzles[currentPuzzleIndex];
+    const makeComputerMove = (currentGame, currentMoveHistory, moveIndex, currentPuzzle) => {
+        if (!currentPuzzle || !currentPuzzle.moves || currentPuzzle.moves.length <= moveIndex) {
+            console.error('Invalid puzzle data or move index.');
+            setMessage('Error: Unable to make computer move. Please try another puzzle.');
+            return;
+        }
+
         const computerMove = currentPuzzle.moves[moveIndex];
         
         const newGame = new Chess(currentGame.fen());
@@ -96,7 +141,8 @@ const ChessGame = () => {
         setGame(newGame);
         setCurrentMoveIndex(moveIndex + 1);
         setMoveHistory(newMoveHistory);
-        setMessage('Your turn!');
+        setMessage('Your turn to solve the puzzle!');
+        console.log('Computer move made:', computerMove, 'New FEN:', newGame.fen());
     };
 
     const showCongratulations = () => {
@@ -120,6 +166,13 @@ const ChessGame = () => {
         initializeGame(puzzles[newIndex]);
     };
 
+    const handleInputKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleMove(moveInput);
+            setMoveInput('');
+        }
+    };
+
     useEffect(() => {
         const handleKeyPress = (event) => {
             if (event.key === 'ArrowLeft') {
@@ -141,25 +194,39 @@ const ChessGame = () => {
     }
 
     return (
-        <div className="chess-game">
-            <Chessboard
-                position={game.fen()}
-                boardOrientation={userColor === 'w' ? 'white' : 'black'}
-                onPieceDrop={(sourceSquare, targetSquare) => {
-                    if (game.turn() !== userColor) return false; // Prevent moves when it's not the user's turn
-                    const move = `${sourceSquare}${targetSquare}`;
-                    handleMove(move);
-                    return true;
-                }}
-            />
-            <div className="message">{message}</div>
-            <div className="controls">
-                <button onClick={prevPuzzle}>Previous</button>
-                <button onClick={nextPuzzle}>Next</button>
-                <button onClick={resetGame}>Reset</button>
-            </div>
-            <div className="info">
+        <div className="chess-game-container">
+            <h1 className="chess-game-title">Customized Puzzles</h1>
+            <div className="game-info">
+                <p>Current turn: {game.turn() === 'w' ? 'White' : 'Black'}</p>
                 <p>Puzzle: {currentPuzzleIndex + 1} / {puzzles.length}</p>
+            </div>
+            <div className="chessboard-wrapper">
+                <Chessboard
+                    position={game.fen()}
+                    boardOrientation={userColor === 'w' ? 'white' : 'black'}
+                    onPieceDrop={(sourceSquare, targetSquare) => {
+                        if (isAnimating || game.turn() !== userColor) return false;
+                        const move = `${sourceSquare}${targetSquare}`;
+                        handleMove(move);
+                        return true;
+                    }}
+                />
+            </div>
+            <div className="message">{message}</div>
+            <div className="button-group">
+                <button className="btn btn-blue" onClick={prevPuzzle}>Previous Puzzle</button>
+                <button className="btn btn-green" onClick={resetGame}>Reset Puzzle</button>
+                <button className="btn btn-blue" onClick={nextPuzzle}>Next Puzzle</button>
+            </div>
+            <input
+                className="move-input"
+                type="text"
+                placeholder="Enter move (e.g., e2e4)"
+                value={moveInput}
+                onChange={(e) => setMoveInput(e.target.value)}
+                onKeyDown={handleInputKeyDown}
+            />
+            <div className="additional-info">
                 <p>Move: {currentMoveIndex + 1} / {puzzles[currentPuzzleIndex]?.moves.length}</p>
                 <p>You are playing as: {userColor === 'w' ? 'White' : 'Black'}</p>
             </div>

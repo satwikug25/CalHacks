@@ -172,14 +172,13 @@ def ask_question():
             stream=False,
             stop=None
         )
-        print(response.choices[0].message.content)
         return response.choices[0].message.content
     except Exception as e:
         print(f"Error in get_llama_feedback: {str(e)}")
         return f"An error occurred while generating feedback: {str(e)}"
 
 @app.route('/get_games/<username>')
-def getGames(username):
+def getGames10(username):
     if not username:
         return jsonify({"error": "Username is required"}), 400
 
@@ -274,7 +273,7 @@ def get_llama_feedback(games, username):
         print(f"Error in get_llama_feedback: {str(e)}")
         return f"An error occurred while generating feedback: {str(e)}"
     
-def get_puzzles(themes, rating='1500', count='25', max_retries=3, initial_delay=1):
+def get_puzzles(themes, rating='1500', count='25'):
     url = "https://chess-puzzles.p.rapidapi.com/"
     headers = {
         'x-rapidapi-key': os.environ['RAPIDAPI_KEY'],
@@ -286,7 +285,6 @@ def get_puzzles(themes, rating='1500', count='25', max_retries=3, initial_delay=
         querystring = {
             "themes": json.dumps([theme]),
             "rating": rating,
-            "themesType": "ALL",
             "count": count
         }
         print(f"Fetching puzzles for theme: {theme}")
