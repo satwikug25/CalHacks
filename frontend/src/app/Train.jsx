@@ -97,39 +97,7 @@ const ChessGame = () => {
         animateMove();
     };
 
-    const handleMove = (move) => {
-        if (isAnimating || game.turn() !== userColor) return;
-
-        console.log('Attempting move:', move);
-        const currentPuzzle = puzzles[currentPuzzleIndex];
-        const expectedMove = currentPuzzle.moves[currentMoveIndex];
-
-        console.log('Expected move:', expectedMove);
-
-        if (move === expectedMove) {
-            const newGame = new Chess(game.fen());
-            newGame.move(move);
-            const newMoveHistory = [...moveHistory, move];
-            
-            setGame(newGame);
-            setCurrentMoveIndex(prevIndex => prevIndex + 1);
-            setMoveHistory(newMoveHistory);
-
-            console.log('Correct move made. New FEN:', newGame.fen());
-
-            if (currentMoveIndex + 1 < currentPuzzle.moves.length) {
-                setMessage('Correct! Opponent is thinking...');
-                setTimeout(() => makeComputerMove(newGame, newMoveHistory, currentMoveIndex + 1), 500);
-            } else {
-                showCongratulations();
-            }
-        } else {
-            setMessage('Incorrect move. Try again!');
-            console.log('Incorrect move. Expected:', expectedMove, 'Got:', move);
-        }
-    };
-
-    const makeComputerMove = (currentGame, currentMoveHistory, moveIndex, currentPuzzle) => {
+    const makeComputerMove = useCallback((currentGame, currentMoveHistory, moveIndex, currentPuzzle) => {
         if (!currentPuzzle || !currentPuzzle.moves || currentPuzzle.moves.length <= moveIndex) {
             console.error('Invalid puzzle data or move index.');
             setMessage('Error: Unable to make computer move. Please try another puzzle.');
@@ -145,9 +113,9 @@ const ChessGame = () => {
         setGame(newGame);
         setCurrentMoveIndex(moveIndex + 1);
         setMoveHistory(newMoveHistory);
-        setMessage('Your turn to solve the puzzle!');
+        
         console.log('Computer move made:', computerMove, 'New FEN:', newGame.fen());
-    };
+    }, []);
 
     const showCongratulations = () => {
         setMessage('Congratulations! You\'ve solved the puzzle!');
@@ -192,6 +160,53 @@ const ChessGame = () => {
             window.removeEventListener('keydown', handleKeyPress);
         };
     }, [currentPuzzleIndex, puzzles]);
+
+    const handleMove = useCallback((move) => {
+        if (isAnimating || !game || game.turn() !== userColor) return;
+
+        console.log('Attempting move:', move);
+        const currentPuzzle = puzzles[currentPuzzleIndex];
+        if (!currentPuzzle || !currentPuzzle.moves) {
+            console.error('Invalid puzzle data');
+            setMessage('Error: Invalid puzzle data. Please try another puzzle.');
+            return;
+        }
+
+        const expectedMove = currentPuzzle.moves[currentMoveIndex];
+
+        console.log('Expected move:', expectedMove);
+
+        if (move === expectedMove) {
+            const newGame = new Chess(game.fen());
+            newGame.move(move);
+            const newMoveHistory = [...moveHistory, move];
+            
+            setGame(newGame);
+            setCurrentMoveIndex(prevIndex => prevIndex + 1);
+            setMoveHistory(newMoveHistory);
+
+            console.log('Correct move made. New FEN:', newGame.fen());
+
+            if (currentMoveIndex + 1 < currentPuzzle.moves.length) {
+                setMessage('Correct! Opponent is thinking...');
+                setIsAnimating(true);
+                setTimeout(() => {
+                    makeComputerMove(newGame, newMoveHistory, currentMoveIndex + 1, currentPuzzle);
+                    setIsAnimating(false);
+                    if (currentMoveIndex + 2 < currentPuzzle.moves.length) {
+                        setMessage('Your turn to solve the puzzle!');
+                    } else {
+                        showCongratulations();
+                    }
+                }, 500);
+            } else {
+                showCongratulations();
+            }
+        } else {
+            setMessage('Incorrect move. Try again!');
+            console.log('Incorrect move. Expected:', expectedMove, 'Got:', move);
+        }
+    }, [game, userColor, puzzles, currentPuzzleIndex, currentMoveIndex, moveHistory, makeComputerMove, showCongratulations, isAnimating]);
 
     if (!game) {
         return <div className={`transition-opacity duration-500`}>Loading...</div>;
@@ -239,4 +254,3 @@ const ChessGame = () => {
 };
 
 export default ChessGame;
-
