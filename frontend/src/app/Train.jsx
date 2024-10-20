@@ -1,128 +1,168 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
-import { Button } from '@chakra-ui/react'
-import './css/Train.css';  // Import the CSS file
-
-// sample will give from backend
-
-const samples = [
-  {
-    initialFEN: 'q3k1nr/1pp1nQpp/3p4/1P2p3/4P3/B1PP1b2/B5PP/5K2 b k - 0 17',
-    moves: ['e8d7', 'a2e6', 'd7d8', 'f7f8']
-  },
-  {
-    initialFEN: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    moves: ['e2e4', 'e7e5', 'g1f3', 'b8c6']
-  },
-  {
-    initialFEN: 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3',
-    moves: ['f1b5', 'a7a6', 'b5a4', 'g8f6']
-  }
-];
+import './css/Train.css';
 
 const ChessGame = () => {
-    const [sampleIndex, setSampleIndex] = useState(0);
-    const [game, setGame] = useState(new Chess(samples[0].initialFEN));
+    const [puzzles, setPuzzles] = useState([]);
+    const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
+    const [game, setGame] = useState(null);
     const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
     const [message, setMessage] = useState('');
-    const [currentTurn, setCurrentTurn] = useState(game.turn());
+    const [moveHistory, setMoveHistory] = useState([]);
+    const [userColor, setUserColor] = useState('w');
     const username = localStorage.getItem('username');
-    
+
     const fetchTrainingData = async () => {
-        const response = await fetch(`http://localhost:5000/analyze_and_get_puzzles?username=${username}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        try {
+            const response = await fetch(`http://localhost:5000/analyze_and_get_puzzles?username=${username}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            return data.puzzles;
+        } catch (error) {
+            console.error('Error fetching training data:', error);
+            return [];
         }
-        return response.json();
     };
 
-    console.log(fetchTrainingData());
+    useEffect(() => {
+        const loadPuzzles = async () => {
+            const fetchedPuzzles = await fetchTrainingData();
+            setPuzzles(fetchedPuzzles);
+            if (fetchedPuzzles.length > 0) {
+                initializeGame(fetchedPuzzles[0]);
+            }
+        };
+        loadPuzzles();
+    }, []);
+
+    const initializeGame = useCallback((puzzle) => {
+        const newGame = new Chess(puzzle.fen);
+        setGame(newGame);
+        setCurrentMoveIndex(0);
+        setMoveHistory([]);
+        // Determine user's color based on whose turn it is in the initial position
+        const newUserColor = newGame.turn() === 'w' ? 'w' : 'b';
+        setUserColor(newUserColor);
+        setMessage(newUserColor === 'w' ? 'Make your move!' : 'Wait for opponent\'s move...');
+        
+        // If it's not the user's turn, make the computer's move
+        if (newUserColor !== newGame.turn()) {
+            setTimeout(() => makeComputerMove(newGame, [], 0), 500);
+        }
+    }, []);
 
     const handleMove = (move) => {
-        const currentMove = samples[sampleIndex].moves[currentMoveIndex];
-        if (move === currentMove) {
-            if (game.turn() !== currentTurn) {
-                setMessage(`It's not your turn! Current turn: ${currentTurn === 'w' ? 'White' : 'Black'}`);
-                return;
+        const currentPuzzle = puzzles[currentPuzzleIndex];
+        const expectedMove = currentPuzzle.moves[currentMoveIndex];
+
+        if (move === expectedMove) {
+            const newGame = new Chess(game.fen());
+            newGame.move(move);
+            const newMoveHistory = [...moveHistory, move];
+            
+            setGame(newGame);
+            setCurrentMoveIndex(prevIndex => prevIndex + 1);
+            setMoveHistory(newMoveHistory);
+            setMessage('Correct! Opponent is moving...');
+
+            // Check if there are more moves in the puzzle
+            if (currentMoveIndex + 1 < currentPuzzle.moves.length) {
+                // Make the computer's move
+                setTimeout(() => makeComputerMove(newGame, newMoveHistory, currentMoveIndex + 1), 500);
+            } else {
+                showCongratulations();
             }
-
-            game.move(move);
-            setCurrentMoveIndex(currentMoveIndex + 1);
-            setMessage(`Move ${move} is valid!`);
-            setCurrentTurn(game.turn());
         } else {
-            setMessage(`Invalid move! You cannot play ${move} at this time.`);
+            setMessage('Incorrect move. Try again!');
+            // Revert to previous state
+            const newGame = new Chess();
+            newGame.load(game.fen());
+            moveHistory.forEach(historyMove => newGame.move(historyMove));
+            setGame(newGame);
         }
-
-        setGame(new Chess(game.fen()));
     };
 
-    const makeMove = (move) => {
-        handleMove(move);
+    const makeComputerMove = (currentGame, currentMoveHistory, moveIndex) => {
+        const currentPuzzle = puzzles[currentPuzzleIndex];
+        const computerMove = currentPuzzle.moves[moveIndex];
+        
+        const newGame = new Chess(currentGame.fen());
+        newGame.move(computerMove);
+        const newMoveHistory = [...currentMoveHistory, computerMove];
+
+        setGame(newGame);
+        setCurrentMoveIndex(moveIndex + 1);
+        setMoveHistory(newMoveHistory);
+        setMessage('Your turn!');
+    };
+
+    const showCongratulations = () => {
+        setMessage('Congratulations! You\'ve solved the puzzle!');
+        setTimeout(nextPuzzle, 2000);
     };
 
     const resetGame = () => {
-        const newGame = new Chess(samples[sampleIndex].initialFEN);
-        setGame(newGame);
-        setCurrentMoveIndex(0);
-        setMessage('');
-        setCurrentTurn(newGame.turn());
+        initializeGame(puzzles[currentPuzzleIndex]);
     };
 
-    const nextSample = () => {
-        const newIndex = (sampleIndex + 1) % samples.length;
-        setSampleIndex(newIndex);
-        const newGame = new Chess(samples[newIndex].initialFEN);
-        setGame(newGame);
-        setCurrentMoveIndex(0);
-        setMessage('');
-        setCurrentTurn(newGame.turn());
+    const nextPuzzle = () => {
+        const newIndex = (currentPuzzleIndex + 1) % puzzles.length;
+        setCurrentPuzzleIndex(newIndex);
+        initializeGame(puzzles[newIndex]);
     };
 
-    const prevSample = () => {
-        const newIndex = (sampleIndex - 1 + samples.length) % samples.length;
-        setSampleIndex(newIndex);
-        const newGame = new Chess(samples[newIndex].initialFEN);
-        setGame(newGame);
-        setCurrentMoveIndex(0);
-        setMessage('');
-        setCurrentTurn(newGame.turn());
+    const prevPuzzle = () => {
+        const newIndex = (currentPuzzleIndex - 1 + puzzles.length) % puzzles.length;
+        setCurrentPuzzleIndex(newIndex);
+        initializeGame(puzzles[newIndex]);
     };
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === 'ArrowLeft') {
+                prevPuzzle();
+            } else if (event.key === 'ArrowRight') {
+                nextPuzzle();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [currentPuzzleIndex, puzzles]);
+
+    if (!game) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <div className="chess-game-container">
-            <h1 className="chess-game-title">Cutomized Puzzles</h1>
-            <div className="game-info">
-                <p>Current turn: {currentTurn === 'w' ? 'White' : 'Black'}</p>
-                <p>Sample: {sampleIndex + 1} / {samples.length}</p>
-            </div>
-            <div className="chessboard-wrapper">
-                <Chessboard
-                    position={game.fen()}
-                    onPieceDrop={(sourceSquare, targetSquare) => {
-                        const move = `${sourceSquare}${targetSquare}`;
-                        makeMove(move);
-                    }}
-                />
-            </div>
-            <div className="button-group">
-                <Button colorScheme='blue' onClick={prevSample}>Previous Sample</Button>
-                <Button colorScheme='green' onClick={resetGame}>Reset Game</Button>
-                <Button colorScheme='blue' onClick={nextSample}>Next Sample</Button>
-            </div>
-            <input
-                className="move-input"
-                type="text"
-                placeholder="Enter move"
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        makeMove(e.target.value);
-                        e.target.value = ''; 
-                    }
+        <div className="chess-game">
+            <Chessboard
+                position={game.fen()}
+                boardOrientation={userColor === 'w' ? 'white' : 'black'}
+                onPieceDrop={(sourceSquare, targetSquare) => {
+                    if (game.turn() !== userColor) return false; // Prevent moves when it's not the user's turn
+                    const move = `${sourceSquare}${targetSquare}`;
+                    handleMove(move);
+                    return true;
                 }}
             />
-            {message && <p className="message">{message}</p>}
+            <div className="message">{message}</div>
+            <div className="controls">
+                <button onClick={prevPuzzle}>Previous</button>
+                <button onClick={nextPuzzle}>Next</button>
+                <button onClick={resetGame}>Reset</button>
+            </div>
+            <div className="info">
+                <p>Puzzle: {currentPuzzleIndex + 1} / {puzzles.length}</p>
+                <p>Move: {currentMoveIndex + 1} / {puzzles[currentPuzzleIndex]?.moves.length}</p>
+                <p>You are playing as: {userColor === 'w' ? 'White' : 'Black'}</p>
+            </div>
         </div>
     );
 };
