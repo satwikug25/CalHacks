@@ -186,7 +186,8 @@ def get_evaluation():
     
     prompt = f'''You are given the FEN of a chess game as well as a square and possible moves for the piece at that square: 
                 Your job is to return an array of objects for each possible movewith eval property (ranging from -1 for terrible move to +1 for great move but no 0s) and a 1-2 line reason for the eval. Be absolutely honest, don't sugarcoat anything, with opening moves you can be less extreme with the eval.
-
+                IF A MOVE CAUSES LOSSES AT ALL, ESPECIALLY HEAVY ONES LIKE THE LOSS OF A PIECE, MAKE SURE THE EVAL IS NEGATIVE AND THE REASON CONVEYS THIS, BE BRUTAL.
+                
                 FEN: {fen}
                 Square: {square}
                 Possible Moves: {moves}
