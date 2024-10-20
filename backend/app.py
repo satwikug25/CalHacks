@@ -221,7 +221,7 @@ def get_evaluation():
         return f"An error occurred while generating feedback: {str(e)}"
 
 @app.route('/get_games/<username>')
-def getGames(username):
+def getGames10(username):
     if not username:
         return jsonify({"error": "Username is required"}), 400
 

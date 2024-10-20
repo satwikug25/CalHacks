@@ -14,6 +14,14 @@ const Choose = () => {
     navigate('/train');
   };
 
+  const handleSearch = () => {
+    navigate('/search');
+  };
+
+  const handleUpload = () => {
+    navigate('/upload');
+  };
+  
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const username = searchParams.get('username');
@@ -32,6 +40,13 @@ const Choose = () => {
         <button className="button" onClick={handleTrain}>
           Train
         </button>
+        <button className="button" onClick={handleSearch}>
+          Search
+        </button>
+        <button className="button" onClick={handleUpload}>
+          Upload
+        </button>
+
       </div>
     </div>
   );
