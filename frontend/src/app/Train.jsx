@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
 
-import './css/Train.css';
+// import './css/Train.css';
 
 const ChessGame = () => {
     const [puzzles, setPuzzles] = useState([]);
@@ -16,9 +16,9 @@ const ChessGame = () => {
     const [moveInput, setMoveInput] = useState('');
     const username = localStorage.getItem('username');
 
-    useEffect(() => {
-        setTimeout(() => setIsLoaded(true), 100);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(() => setIsLoaded(true), 100);
+    // }, []);
 
     const fetchTrainingData = async () => {
         try {
@@ -194,7 +194,7 @@ const ChessGame = () => {
     }, [currentPuzzleIndex, puzzles]);
 
     if (!game) {
-        return <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>Loading...</div>;
+        return <div className={`transition-opacity duration-500`}>Loading...</div>;
     }
 
     return (
