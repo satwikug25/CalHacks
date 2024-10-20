@@ -316,7 +316,7 @@ def get_llama_feedback(games, username):
         print(f"Error in get_llama_feedback: {str(e)}")
         return f"An error occurred while generating feedback: {str(e)}"
     
-def get_puzzles(themes, rating='1500', count='25'):
+def get_puzzles(themes, rating='1500', count='10'):
     url = "https://chess-puzzles.p.rapidapi.com/"
     headers = {
         'x-rapidapi-key': os.environ['RAPIDAPI_KEY'],

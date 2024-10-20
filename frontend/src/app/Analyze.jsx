@@ -40,7 +40,7 @@ const Analyze = ({ openedChessGameChat, setOpenedChessGameChat }) => {
               ))}
             </div>
           ) : (
-            <div className={`flex flex-wrap gap-6 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
+            <div className={`flex flex-wrap justify-center items-center gap-6 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
               {games.map((game, index) => (
                 <ChessGame
                   key={index}
