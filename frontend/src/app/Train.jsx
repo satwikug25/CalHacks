@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
-import { Button } from '@chakra-ui/react'
 import './css/Train.css';  // Import the CSS file
 
 // sample will give from backend
@@ -107,9 +106,9 @@ const ChessGame = () => {
                 />
             </div>
             <div className="button-group">
-                <Button colorScheme='blue' onClick={prevSample}>Previous Sample</Button>
-                <Button colorScheme='green' onClick={resetGame}>Reset Game</Button>
-                <Button colorScheme='blue' onClick={nextSample}>Next Sample</Button>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={prevSample}>Previous Sample</button>
+                <button className="bg-green-500 text-white px-4 py-2 rounded-md" onClick={resetGame}>Reset Game</button>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={nextSample}>Next Sample</button>
             </div>
             <input
                 className="move-input"

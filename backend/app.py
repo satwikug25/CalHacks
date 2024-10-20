@@ -95,16 +95,88 @@ def train():
     feedback = get_llama_feedback(games,username)
     return jsonify(feedback)
 
-def get_llama_feedback(games, username):
-    groq_api_key = os.environ.get('GROQ_API_KEY')
-    if not groq_api_key:
-        raise ValueError("GROQ_API_KEY is not set in environment variables")
+groq_api_key = os.environ.get('GROQ_API_KEY')
+if not groq_api_key:
+    raise ValueError("GROQ_API_KEY is not set in environment variables")
 
-    groq_client = Groq(api_key=groq_api_key)
+groq_client = Groq(api_key=groq_api_key)
 
     # Use a model that exists and you have access to
-    model = "llama-3.1-70b-versatile"  # or another model you have access to
+model = "llama-3.1-70b-versatile"
 
+@app.post('/ask_question')
+def ask_question():
+    data = request.json
+    question = data.get('question')
+    pgn = data.get('pgn')
+    currentMove = data.get('currentMove')
+
+    prompt = f'''You will be given the following details about a chess game: 
+                \nQuestion: {question}
+
+                If the question is not related to chess, no matter the below details, respond with "I'm sorry, I can only provide feedback on chess games."
+                The user might also ask general questions about moves that are not in the PGN but hypothetical, in which case you should answer them based on the PGN and current board position.
+
+                \nPGN: {pgn}
+                \nCurrent Move: {currentMove}
+
+                Limit your answers to 50 words and be brutal.'''
+    
+    try:
+        response = groq_client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert chess analyst providing personalized feedback to players."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.7,
+            max_tokens=1000,
+            top_p=1,
+            stream=False,
+            stop=None
+        )
+        print(response.choices[0].message.content)
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error in get_llama_feedback: {str(e)}")
+        return f"An error occurred while generating feedback: {str(e)}"
+
+@app.route('/get_games/<username>')
+def getGames(username):
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
+
+    url = f'https://lichess.org/api/games/user/{username}'
+
+    headers = {
+        'Accept': 'application/x-ndjson'
+    }
+
+    params = {
+        'max': 10,
+        'perfType': 'rapid',
+        'pgnInJson': True,
+        'evals': True,
+        'opening': True,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+
+    # Get the raw text response
+    games = response.text.split('\n')
+
+    # with open("t.json", "w") as f:
+    #     f.write(games)
+
+    return jsonify(games)
+
+def get_llama_feedback(games, username):
     puzzle_categories = [
         "advancedPawn", "advantage", "anastasiaMate", "arabianMate", "attackingF2F7",
         "attraction", "backRankMate", "bishopEndgame", "bodenMate", "castling",
@@ -170,10 +242,6 @@ def get_llama_feedback(games, username):
     except Exception as e:
         print(f"Error in get_llama_feedback: {str(e)}")
         return f"An error occurred while generating feedback: {str(e)}"
-
-    
-
-    
 
 if __name__ == '__main__':
     app.run(port=port)
