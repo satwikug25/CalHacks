@@ -14,8 +14,7 @@ const Analyze = () => {
     fetch(`http://localhost:5000/get_games/${localStorage.getItem('username')}`)
       .then(response => response.json())
       .then(data => {
-        setGames(data.filter(game => game).map(game => JSON.parse(game)).map(game => ({white: game.players.white.user.name, black: game.players.black.user.name, whiteElo: game.players.white.rating, blackElo: game.players.black.rating, winner: game.winner[0].toUpperCase() + game.winner.slice(1), status: game.status, moves: game.moves.split(' ')})));
-        console.log(data.filter(game => game).map(game => JSON.parse(game)));
+        setGames(data.filter(game => game).map(game => JSON.parse(game)).map(game => ({white: game.players.white.user.name, black: game.players.black.user.name, whiteElo: game.players.white.rating, blackElo: game.players.black.rating, winner: game.winner ? game.winner[0].toUpperCase() + game.winner.slice(1) : null, status: game.status, moves: game.moves.split(' ')})));
       });
   }, [])
 

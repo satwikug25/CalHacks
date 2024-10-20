@@ -29,6 +29,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
   const [boardOrientation, setBoardOrientation] = useState('white');
   const movesContainerRef = useRef(null);
   const [question, setQuestion] = useState('');
+  const [respondedQuestion, setRespondedQuestion] = useState('');
   const [response, setResponse] = useState('');
   const [gameResult, setGameResult] = useState('');
   const [highlightedSquares, setHighlightedSquares] = useState({});
@@ -81,6 +82,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
         currentMove: currentMoveIndex >= 0 ? `${pgn.moves[currentMoveIndex]} (move ${currentMoveIndex + 1})` : "start"
       });
       setResponse(apiResponse.data);
+      setRespondedQuestion(question + " (at " + (currentMoveIndex >= 0 ? "move " + parseInt((currentMoveIndex/2 + 1)) : "start") + ")");
     } catch (error) {
       console.error("Error asking question:", error);
       setResponse("An error occurred while processing your question.");
@@ -105,9 +107,9 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
 
   const getGameOverContent = () => {
     if (gameResult === 'Draw') {
-      return { icon: <FaHandshake className="mr-2" />, text: 'Draw' };
+      return { icon: <FaHandshake />, text: 'Draw' };
     } else {
-      return { icon: <FaTrophy className="mr-2" />, text: gameResult };
+      return { icon: <FaTrophy />, text: gameResult };
     }
   };
 
@@ -146,23 +148,30 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/get_evaluation', {
-        fen: game.fen(),
-        square: square,
-        moves: moves
-      });
+        let results = JSON.parse(localStorage.getItem(`${game.fen()}-${square}`));
 
-      const results = response.data;
+        if (!results) {
+            const response = await axios.post('http://localhost:5000/get_evaluation', {
+                fen: game.fen(),
+                square: square,
+                moves: moves
+            });
+      
+            results = response.data;
+            localStorage.setItem(`${game.fen()}-${square}`, JSON.stringify(results));
+        }
 
-      const newPossibleMoves = moves.reduce((acc, move, index) => {
-        const evaluation = results[index].eval;
-        acc[move.to] = {
-          backgroundColor: getColorFromEvaluation(evaluation),
-          evaluation: evaluation,
-          reason: results[index].reason
-        };
-        return acc;
-      }, {});
+        console.log(results);
+
+        const newPossibleMoves = moves.reduce((acc, move, index) => {
+                const evaluation = results[index].eval;
+                acc[move.to] = {
+                backgroundColor: getColorFromEvaluation(evaluation),
+                evaluation: evaluation,
+                reason: results[index].reason
+            };
+            return acc;
+        }, {});
 
       console.log('Possible moves with evaluations:', newPossibleMoves);
 
@@ -180,8 +189,8 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
     <div className="flex flex-col items-center justify-center gap-16">
       <button onClick={() => setOpenedChessGameChat(null)} className="text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center"><FaArrowLeft /> Go Back</button>
       <div className="flex flex-col gap-4">
-        <div className={`${boardOrientation === 'white' ? 'bottom-0' : 'top-0'} left-0 bg-opacity-50 w-fit text-white`}>
-        {boardOrientation === 'white' ? `${pgn.white} (${pgn.whiteElo})` : `${pgn.black} (${pgn.blackElo})`}
+        <div className={`${boardOrientation === 'black' ? 'bottom-0' : 'top-0'} left-0 bg-opacity-50 w-fit text-white`}>
+        {boardOrientation === 'black' ? `${pgn.white} (${pgn.whiteElo})` : `${pgn.black} (${pgn.blackElo})`}
         </div>
       <div className="flex h-[540px]">
         <div className="bg-white aspect-square relative">
@@ -215,7 +224,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
           </div>
           {isGameOver && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
-              <div className="text-white text-4xl w-3/4 font-bold flex">
+              <div className="text-white text-4xl w-3/4 font-bold flex justify-center gap-3">
                 {getGameOverContent().icon}
                 {getGameOverContent().text}
               </div>
@@ -228,8 +237,9 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
             <input value={question} onChange={(e) => setQuestion(e.target.value)} type="text" placeholder="Ask a question" className="w-full px-4 py-3 text-md outline-none text-white bg-neutral-700 rounded-md" />
             <button onClick={handleAskQuestion} className="bg-blue-500 text-white px-4 py-2 rounded-md h-full hover:bg-blue-600 transition-all duration-200">Send</button>
           </div>
-          <div className="text-white text-sm text-left overflow-y-auto">
-            {response}
+          <div className="text-white text-sm text-left overflow-y-auto flex flex-col gap-2">
+            { respondedQuestion && <h2 className="font-bold text-lg">{respondedQuestion}</h2> }
+            { response }
           </div>
 
           <div className="mb-auto bg-neutral-700 flex flex-col gap-2 p-2 rounded-lg h-[120px] overflow-y-auto" ref={movesContainerRef}>            
@@ -280,8 +290,8 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
           </div>                     
         </div>
       </div> 
-      <div className={`${boardOrientation === 'white' ? 'top-0' : 'bottom-0'} right-0 bg-opacity-50 w-fit text-white`}>
-        {boardOrientation === 'white' ? `${pgn.black} (${pgn.blackElo})` : `${pgn.white} (${pgn.whiteElo})`}
+        <div className={`${boardOrientation === 'black' ? 'top-0' : 'bottom-0'} right-0 bg-opacity-50 w-fit text-white`}>
+            {boardOrientation === 'black' ? `${pgn.black} (${pgn.blackElo})` : `${pgn.white} (${pgn.whiteElo})`}
         </div>
       </div>       
     </div>
@@ -292,8 +302,8 @@ ChessGameChat.propTypes = {
   pgn: PropTypes.shape({
     white: PropTypes.string,
     black: PropTypes.string,
-    whiteElo: PropTypes.string,
-    blackElo: PropTypes.string,
+    whiteElo: PropTypes.number,
+    blackElo: PropTypes.number,
     winner: PropTypes.string,
     status: PropTypes.string,
     moves: PropTypes.arrayOf(PropTypes.string)
