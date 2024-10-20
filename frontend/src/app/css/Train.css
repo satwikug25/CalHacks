@@ -2,7 +2,6 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    font-family: 'Arial', sans-serif;
     background-color: #f0f0f0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -63,10 +62,41 @@
   }
   
   .message {
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: bold;
-    color: #e74c3c;
-    margin-top: 10px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .controls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .controls button:hover {
+    background-color: #45a049;
+  }
+  
+  .info {
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .info p {
+    margin: 5px 0;
   }
   
   @media (max-width: 600px) {
