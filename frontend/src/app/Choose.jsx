@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { useNavigate, Link , useLocation} from 'react-router-dom';
 import './css/Choose.css';
 
-const Choose =() => {
+const Choose = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
