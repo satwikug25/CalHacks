@@ -177,6 +177,48 @@ def ask_question():
         print(f"Error in get_llama_feedback: {str(e)}")
         return f"An error occurred while generating feedback: {str(e)}"
 
+@app.post('/get_evaluation')
+def get_evaluation():
+    data = request.json
+    fen = data.get('fen')
+    square = data.get('square')
+    moves = data.get('moves')
+    
+    prompt = f'''You are given the FEN of a chess game as well as a square and possible moves for the piece at that square: 
+                Your job is to return an array of objects for each possible movewith eval property (ranging from -1 for terrible move to +1 for great move but no 0s) and a 1-2 line reason for the eval. Be absolutely honest, don't sugarcoat anything, with opening moves you can be less extreme with the eval.
+
+                FEN: {fen}
+                Square: {square}
+                Possible Moves: {moves}
+
+                MAKE SURE YOU RETURN ONLY AN ARRAY IN THE GIVEN FORMAT. DO NOT RETURN ANYTHING ELSE INCLUDING ANY TEXT OUTSIDE THE ARRAY. 
+                ARRAY:'''
+    
+    try:
+        response = groq_client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert chess analyst providing personalized feedback to players."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.7,
+            max_tokens=1000,
+            top_p=1,
+            stream=False,
+            stop=None
+        )
+        print(response.choices[0].message.content)
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error in get_llama_feedback: {str(e)}")
+        return f"An error occurred while generating feedback: {str(e)}"
+
 @app.route('/get_games/<username>')
 def getGames10(username):
     if not username:

@@ -25,9 +25,9 @@ const ChessGame = ({ pgn, setOpenedChessGameChat }) => {
         >
             <Chessboard position={game.fen()} boardWidth={240} />
 
-            <div className="absolute inset-0 bg-black bg-opacity-80 opacity-0 hover:opacity-100 transition-all duration-300 flex flex-col justify-center items-center text-white p-2">
-                <p>{pgn.white} vs {pgn.black}</p>
-                <p>Result: {pgn.winner == 'Black' || pgn.winner == 'White' ? pgn.winner + " wins because of " + pgn.status : 'Draw'} </p>
+            <div className="absolute gap-1 inset-0 bg-black bg-opacity-80 opacity-0 hover:opacity-100 transition-all duration-300 flex flex-col justify-center items-center text-white p-2">
+                <p className='text-lg font-semibold'>{pgn.white} vs {pgn.black}</p>
+                <p>{pgn.result == 'Black' || pgn.result == 'White' ? pgn.result + " wins" + (pgn.status ? " because of " + pgn.status : "") : 'Draw'} </p>
             </div>
         </div>
     )

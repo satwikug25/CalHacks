@@ -4,7 +4,24 @@ import PropTypes from 'prop-types';
 import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import { FaChevronLeft, FaChevronRight, FaTrophy, FaHandshake } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
 import { HiMiniArrowsUpDown } from "react-icons/hi2";
+
+const getColorFromEvaluation = (evaluation) => {
+  if (typeof evaluation !== 'number') return 'rgba(0,0,0,0.1)';
+  
+  const maxOpacity = 0.7;
+  const minOpacity = 0.1;
+  const maxEval = 1; // Adjust this value based on what you consider a significant advantage
+
+  const opacity = Math.min(Math.abs(evaluation) / maxEval, 1) * (maxOpacity - minOpacity) + minOpacity;
+  
+  if (evaluation > 0) {
+    return `rgba(0, 255, 0, ${opacity})`; // Green for positive evaluations
+  } else {
+    return `rgba(255, 0, 0, ${opacity})`; // Red for negative evaluations
+  }
+};
 
 const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
   const [game, setGame] = useState(new Chess());
@@ -12,17 +29,19 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
   const [boardOrientation, setBoardOrientation] = useState('white');
   const movesContainerRef = useRef(null);
   const [question, setQuestion] = useState('');
+  const [respondedQuestion, setRespondedQuestion] = useState('');
   const [response, setResponse] = useState('');
   const [gameResult, setGameResult] = useState('');
   const [highlightedSquares, setHighlightedSquares] = useState({});
   const [possibleMoves, setPossibleMoves] = useState({});
+  const [loadingMoves, setLoadingMoves] = useState([]);
 
   useEffect(() => {
     if (pgn && pgn.moves) {
       const newGame = new Chess();
       setGame(newGame);
       setCurrentMoveIndex(-1);
-      setGameResult(pgn.winner ? pgn.winner + " wins because of " + pgn.status : 'Draw');
+      setGameResult(pgn.result ? pgn.result + (pgn.status ? " because of " + pgn.status : "") : 'Draw');
     }
   }, [pgn]);
 
@@ -64,6 +83,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
         currentMove: currentMoveIndex >= 0 ? `${pgn.moves[currentMoveIndex]} (move ${currentMoveIndex + 1})` : "start"
       });
       setResponse(apiResponse.data);
+      setRespondedQuestion(question + " (at " + (currentMoveIndex >= 0 ? "move " + parseInt((currentMoveIndex/2 + 1)) : "start") + ")");
     } catch (error) {
       console.error("Error asking question:", error);
       setResponse("An error occurred while processing your question.");
@@ -88,9 +108,9 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
 
   const getGameOverContent = () => {
     if (gameResult === 'Draw') {
-      return { icon: <FaHandshake className="mr-2" />, text: 'Draw' };
+      return { icon: <FaHandshake />, text: 'Draw' };
     } else {
-      return { icon: <FaTrophy className="mr-2" />, text: gameResult };
+      return { icon: <FaTrophy />, text: gameResult };
     }
   };
 
@@ -119,43 +139,115 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
     }
   };
 
-  const onSquareClick = (square) => {
+  const onSquareClick = async (square) => {
     const moves = game.moves({ square: square, verbose: true });
     console.log('Possible moves:', moves);
 
-    const newPossibleMoves = {};
-    moves.forEach(move => {
-      newPossibleMoves[move.to] = {
-        background: 'radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)',
-        borderRadius: '50%'
-      };
-    });
+    if (moves.length == 0) {
+      setPossibleMoves({});
+      return;
+    }
 
-    setPossibleMoves(newPossibleMoves);
-    setHighlightedSquares({
-      ...newPossibleMoves,
-      [square]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' }
-    });
+    setLoadingMoves(moves.map(move => move.to));
+
+    try {
+      let results = JSON.parse(localStorage.getItem(`${game.fen()}-${square}`));
+
+      if (!results) {
+        const response = await axios.post('http://localhost:5000/get_evaluation', {
+          fen: game.fen(),
+          square: square,
+          moves: moves
+        });
+      
+        results = response.data;
+        localStorage.setItem(`${game.fen()}-${square}`, JSON.stringify(results));
+      }
+
+      console.log(results);
+
+      const newPossibleMoves = moves.reduce((acc, move, index) => {
+        const evaluation = results[index].eval;
+        acc[move.to] = {
+          backgroundColor: getColorFromEvaluation(evaluation),
+          evaluation: evaluation,
+          reason: results[index].reason
+        };
+        return acc;
+      }, {});
+
+      console.log('Possible moves with evaluations:', newPossibleMoves);
+
+      setPossibleMoves(newPossibleMoves);
+      setHighlightedSquares({
+        ...newPossibleMoves,
+        [square]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' }
+      });
+    } catch (error) {
+      console.error('Error fetching evaluation:', error);
+    } finally {
+      setLoadingMoves([]);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center gap-16">
-      <button onClick={() => setOpenedChessGameChat(null)} className="bg-blue-500 text-white px-4 py-2 rounded-md absolute top-10 left-10">Go Back</button>
+      <button onClick={() => setOpenedChessGameChat(null)} className="text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center"><FaArrowLeft /> Go Back</button>
       <div className="flex flex-col gap-4">
-        <div className={`${boardOrientation === 'white' ? 'bottom-0' : 'top-0'} left-0 bg-opacity-50 w-fit text-white`}>
-        {boardOrientation === 'white' ? `${pgn.white} (${pgn.whiteElo})` : `${pgn.black} (${pgn.blackElo})`}
+        <div className={`${boardOrientation === 'black' ? 'bottom-0' : 'top-0'} left-0 bg-opacity-50 w-fit text-white`}>
+        {boardOrientation === 'black' ? `${pgn.white} (${pgn.whiteElo})` : `${pgn.black} (${pgn.blackElo})`}
         </div>
       <div className="flex h-[540px]">
         <div className="bg-white aspect-square relative">
           <Chessboard 
             position={game.fen()} 
             boardOrientation={boardOrientation} 
-            customSquareStyles={{...highlightedSquares, ...possibleMoves}}
             onSquareClick={onSquareClick}
+            customSquareStyles={{
+              ...highlightedSquares,
+              ...possibleMoves
+            }}
           />
+          {(
+            <div 
+              className="absolute inset-0 grid grid-cols-8 grid-rows-8 pointer-events-none"
+            >
+              {loadingMoves.length > 0 && loadingMoves.map((square, index) => (
+                <div 
+                  key={index}
+                  className="animate-pulse bg-yellow-500 bg-opacity-40"
+                  style={{
+                    gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
+                  }}
+                >
+                  <div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer group"
+                >
+                  </div>
+                </div>
+              ))}
+              {Object.entries(possibleMoves).map(([square, data]) => (
+              <div 
+                key={square} 
+                className="relative"
+                style={{
+                  gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
+                }}
+              >
+                <div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer group"
+                >
+                  <div className="opacity-0 group-hover:opacity-100 pointer-events-none bg-black text-white p-2 w-96 rounded absolute bottom-full left-1/2 transform -translate-x-1/2 transition-opacity duration-200 z-10">
+                    {data.reason}
+                  </div>
+                </div>
+              </div>
+              ))}
+            </div>
+          )}
           {isGameOver && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
-              <div className="text-white text-4xl w-3/4 font-bold flex">
+              <div className="text-white text-4xl w-3/4 font-bold flex justify-center gap-3">
                 {getGameOverContent().icon}
                 {getGameOverContent().text}
               </div>
@@ -168,8 +260,9 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
             <input value={question} onChange={(e) => setQuestion(e.target.value)} type="text" placeholder="Ask a question" className="w-full px-4 py-3 text-md outline-none text-white bg-neutral-700 rounded-md" />
             <button onClick={handleAskQuestion} className="bg-blue-500 text-white px-4 py-2 rounded-md h-full hover:bg-blue-600 transition-all duration-200">Send</button>
           </div>
-          <div className="text-white text-sm text-left overflow-y-auto">
-            {response}
+          <div className="text-white text-sm text-left overflow-y-auto flex flex-col gap-2">
+            { respondedQuestion && <h2 className="font-bold text-lg">{respondedQuestion}</h2> }
+            { response }
           </div>
 
           <div className="mb-auto bg-neutral-700 flex flex-col gap-2 p-2 rounded-lg h-[120px] overflow-y-auto" ref={movesContainerRef}>            
@@ -220,8 +313,8 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
           </div>                     
         </div>
       </div> 
-      <div className={`${boardOrientation === 'white' ? 'top-0' : 'bottom-0'} right-0 bg-opacity-50 w-fit text-white`}>
-        {boardOrientation === 'white' ? `${pgn.black} (${pgn.blackElo})` : `${pgn.white} (${pgn.whiteElo})`}
+        <div className={`${boardOrientation === 'black' ? 'top-0' : 'bottom-0'} right-0 bg-opacity-50 w-fit text-white`}>
+            {boardOrientation === 'black' ? `${pgn.black} (${pgn.blackElo})` : `${pgn.white} (${pgn.whiteElo})`}
         </div>
       </div>       
     </div>
@@ -232,9 +325,9 @@ ChessGameChat.propTypes = {
   pgn: PropTypes.shape({
     white: PropTypes.string,
     black: PropTypes.string,
-    whiteElo: PropTypes.string,
-    blackElo: PropTypes.string,
-    winner: PropTypes.string,
+    whiteElo: PropTypes.number,
+    blackElo: PropTypes.number,
+    result: PropTypes.string,
     status: PropTypes.string,
     moves: PropTypes.arrayOf(PropTypes.string)
   }),

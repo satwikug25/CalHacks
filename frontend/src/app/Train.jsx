@@ -16,6 +16,10 @@ const ChessGame = () => {
     const [moveInput, setMoveInput] = useState('');
     const username = localStorage.getItem('username');
 
+    useEffect(() => {
+        setTimeout(() => setIsLoaded(true), 100);
+    }, []);
+
     const fetchTrainingData = async () => {
         try {
             const response = await fetch(`http://localhost:5000/analyze_and_get_puzzles?username=${username}`);
@@ -190,7 +194,7 @@ const ChessGame = () => {
     }, [currentPuzzleIndex, puzzles]);
 
     if (!game) {
-        return <div>Loading...</div>;
+        return <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>Loading...</div>;
     }
 
     return (
@@ -235,3 +239,4 @@ const ChessGame = () => {
 };
 
 export default ChessGame;
+
