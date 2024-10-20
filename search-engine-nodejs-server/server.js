@@ -73,16 +73,17 @@ app.post('/upload', async (req, res) => {
 
 app.post('/search', async (req, res) => {
   try {
-    const { query } = req.body;
+    const { query, numResults } = req.body;
     const queryEmbedding = await embedText(query);
 
     const results = await collection.query({
       queryEmbeddings: [queryEmbedding],
-      nResults: 9
+      nResults: numResults || 9
     });
 
     const formattedResults = results.documents[0].map(game => {
       game = JSON.parse(game);
+      console.log(game.moves);
       return ({
       white: game.white,
       black: game.black,

@@ -8,6 +8,7 @@ const Search = () => {
   const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
   const [games, setGames] = useState([]);
   const [query, setQuery] = useState('');
+  const [numResults, setNumResults] = useState(9);
 
 
   const resetGame = () => {
@@ -18,7 +19,7 @@ const Search = () => {
 
   const handleSearchCall = async () => {
     try {
-      const response = await axios.post('http://localhost:8081/search', { query });
+      const response = await axios.post('http://localhost:8081/search', { query, numResults });
       const searchResults = response.data;
       console.log('Received search results:', searchResults);
       if (searchResults && searchResults.length > 0) {
@@ -86,11 +87,11 @@ const Search = () => {
 
   const parsePGN = (pgn) => {
     const moves = [];
-    const regex = /\d+\.\s+(\S+)\s+(\S+)?/g;
+    const regex = /(\d+\.)\s*(\S+)(?:\s+(\S+))?/g;
     let match;
     while ((match = regex.exec(pgn)) !== null) {
-      moves.push(match[1]);
-      if (match[2]) moves.push(match[2]);
+      moves.push(match[2]);
+      if (match[3]) moves.push(match[3]);
     }
     return moves;
   };
@@ -103,6 +104,13 @@ const Search = () => {
           placeholder="Search for games"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Number of results"
+          value={numResults}
+          onChange={(e) => setNumResults(parseInt(e.target.value))}
+          min="1"
         />
         <button onClick={handleSearchCall}>Search</button>
       </div>
@@ -120,19 +128,19 @@ const Search = () => {
               <div>
                 <h4>Current Move: {game.currentMoveIndex}</h4>
                 <p>
-                  {game.currentMoveIndex < game.moves.length &&
-                    `Next move: ${game.moves[game.currentMoveIndex]}`}
+                  {game.currentMoveIndex < (Array.isArray(game.moves) ? game.moves.length : parsePGN(game.moves).length) &&
+                    `Next move: ${Array.isArray(game.moves) ? game.moves[game.currentMoveIndex] : parsePGN(game.moves)[game.currentMoveIndex]}`}
                 </p>
                 <button onClick={() => handlePreviousMove(index)} disabled={game.currentMoveIndex === 0}>
                   Previous Move
                 </button>
                 <button
                   onClick={() => handleNextMove(index)}
-                  disabled={game.currentMoveIndex >= game.moves.length}
+                  disabled={game.currentMoveIndex >= (Array.isArray(game.moves) ? game.moves.length : parsePGN(game.moves).length)}
                 >
                   Next Move
                 </button>
-                {game.currentMoveIndex >= game.moves.length && (
+                {game.currentMoveIndex >= (Array.isArray(game.moves) ? game.moves.length : parsePGN(game.moves).length) && (
                   <p>Game Over! Result: {game.result}</p>
                 )}
               </div>
