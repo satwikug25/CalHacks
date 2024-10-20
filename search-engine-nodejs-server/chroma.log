@@ -1021,3 +1021,115 @@
 [32mINFO[0m:     [20-10-2024 01:00:45] ::1:60771 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
 [32mINFO[0m:     [20-10-2024 01:00:45] ::1:60771 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
 [32mINFO[0m:     [20-10-2024 01:01:15] ::1:60784 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [20-10-2024 01:34:16] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:16] ::1:61280 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:16] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:16] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:16] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:16] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:18] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:18] ::1:61281 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:18] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:18] ::1:61280 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:18] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:18] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:19] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:19] ::1:61280 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:19] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:19] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:19] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:19] ::1:61280 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:21] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:21] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:21] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:21] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:21] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:21] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:22] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:22] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:22] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:22] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:22] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:22] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61348 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[33mWARNING[0m:  [20-10-2024 01:34:24] Insert of existing embedding ID: 1729413264610
+[33mWARNING[0m:  [20-10-2024 01:34:24] Add of existing embedding ID: 1729413264610
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61349 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61348 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:24] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61348 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61347 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61349 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61348 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61351 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61279 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:25] ::1:61350 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/add HTTP/1.1" 201
+[32mINFO[0m:     [20-10-2024 01:34:51] ::1:61358 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [20-10-2024 01:35:30] ::1:61361 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [20-10-2024 01:36:32] ::1:61371 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[33mWARNING[0m:  [20-10-2024 08:01:22] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048575. chroma_server_nofile will not be set.
+[32mINFO[0m:     [20-10-2024 08:01:22] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component System
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component SqliteDB
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component Posthog
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component LocalExecutor
+[36mDEBUG[0m:    [20-10-2024 08:01:22] Starting component SegmentAPI
+[32mINFO[0m:     [20-10-2024 08:01:22] Started server process [[36m88626[0m]
+[32mINFO[0m:     [20-10-2024 08:01:22] Waiting for application startup.
+[32mINFO[0m:     [20-10-2024 08:01:22] Application startup complete.
+[32mINFO[0m:     [20-10-2024 08:01:22] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [20-10-2024 08:03:04] ::1:61770 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [20-10-2024 08:03:04] ::1:61771 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [20-10-2024 08:03:04] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [20-10-2024 08:03:04] ::1:61770 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[36mDEBUG[0m:    [20-10-2024 08:05:52] Starting component PersistentLocalHnswSegment
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379650228
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379717946
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379952174
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379955066
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379955067
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379955541
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379955637
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729379955674
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729380168314
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729380169950
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729383484931
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729383484932
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729383484955
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729383484985
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729383484973
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729411226040
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729411229692
+[33mWARNING[0m:  [20-10-2024 08:05:52] Add of existing embedding ID: 1729413264610
+[32mINFO[0m:     [20-10-2024 08:05:52] ::1:61871 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
+[32mINFO[0m:     [20-10-2024 08:06:19] ::1:61885 - "POST /api/v1/collections/ecd1adc0-1b50-4566-9f1b-0365dd4c71de/query HTTP/1.1" 200
