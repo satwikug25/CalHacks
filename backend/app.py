@@ -349,4 +349,4 @@ def get_puzzles(themes, rating='1500', count='10'):
     return all_puzzles[0]
 
 if __name__ == '__main__':
-    app.run(port=port)
+    app.run()

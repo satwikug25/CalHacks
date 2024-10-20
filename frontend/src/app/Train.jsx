@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronLeft, FaChevronRight, FaLightbulb } from 'react-icons/fa';
 
 // import './css/Train.css';
 
@@ -18,6 +18,7 @@ const ChessGame = () => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [moveInput, setMoveInput] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isSolving, setIsSolving] = useState(false);
     const username = localStorage.getItem('username');
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const ChessGame = () => {
             let fetchedPuzzles = [];
             const storedPuzzles = localStorage.getItem('chessPuzzles');
             
-            if (storedPuzzles) {
+            if (storedPuzzles.length > 0){
                 fetchedPuzzles = JSON.parse(storedPuzzles);
                 console.log('Puzzles loaded from local storage');
             } else {
@@ -223,6 +224,33 @@ const ChessGame = () => {
         }
     }, [game, userColor, puzzles, currentPuzzleIndex, currentMoveIndex, moveHistory, makeComputerMove, showCongratulations, isAnimating]);
 
+    const solvePuzzle = useCallback(() => {
+        setIsSolving(true);
+        const currentPuzzle = puzzles[currentPuzzleIndex];
+        const newGame = new Chess(currentPuzzle.fen);
+        setGame(newGame);
+        setCurrentMoveIndex(0);
+        setMoveHistory([]);
+
+        const animateSolution = (moveIndex = 0) => {
+            if (moveIndex < currentPuzzle.moves.length) {
+                setTimeout(() => {
+                    const move = currentPuzzle.moves[moveIndex];
+                    newGame.move(move);
+                    setGame(new Chess(newGame.fen()));
+                    setMoveHistory(prevHistory => [...prevHistory, move]);
+                    setCurrentMoveIndex(moveIndex + 1);
+                    animateSolution(moveIndex + 1);
+                }, 1000);
+            } else {
+                setIsSolving(false);
+                showCongratulations();
+            }
+        };
+
+        animateSolution();
+    }, [puzzles, currentPuzzleIndex, showCongratulations]);
+
     if (!game) {
         return <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>Loading...</div>;
     }
@@ -273,10 +301,24 @@ const ChessGame = () => {
                 <div className="flex flex-col items-center gap-4 bg-neutral-800 rounded-b-xl w-full px-8 py-6">
                 <div className="text-white flex justify-between items-center w-full">
                 <div className="flex flex-row gap-3 justify-end items-end">
-                    <h2 className="text-2xl font-semibold">Move {currentMoveIndex + 1} / {puzzles[currentPuzzleIndex]?.moves.length}</h2>
+                    <h2 className="text-2xl font-semibold">Move {currentMoveIndex } / {puzzles[currentPuzzleIndex]?.moves.length}</h2>
                     <h2 className="text-lg text-neutral-300">{game.turn() === 'w' ? 'White' : 'Black'}'s turn</h2>
                 </div>
-                    <button className="bg-red-600 hover:bg-red-700 bg-opacity-75 text-white px-4 py-2 rounded-md transition-colors duration-200" onClick={resetGame}>Reset Puzzle</button>
+                    <div className="flex gap-2">
+                        <button 
+                            className="bg-lime-500 hover:bg-lime-600 bg-opacity-75 text-white px-4 py-2 rounded-md transition-colors duration-200 flex items-center gap-2" 
+                            onClick={solvePuzzle}
+                            disabled={isSolving}
+                        >
+                            <FaLightbulb /> Solve
+                        </button>
+                        <button 
+                            className="bg-red-600 hover:bg-red-700 bg-opacity-75 text-white px-4 py-2 rounded-md transition-colors duration-200" 
+                            onClick={resetGame}
+                        >
+                            Reset 
+                        </button>
+                    </div>
                 </div>
                 
                 {/* <input
