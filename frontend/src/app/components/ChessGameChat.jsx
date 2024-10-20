@@ -4,7 +4,24 @@ import PropTypes from 'prop-types';
 import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import { FaChevronLeft, FaChevronRight, FaTrophy, FaHandshake } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
 import { HiMiniArrowsUpDown } from "react-icons/hi2";
+
+const getColorFromEvaluation = (evaluation) => {
+  if (typeof evaluation !== 'number') return 'rgba(0,0,0,0.1)';
+  
+  const maxOpacity = 0.7;
+  const minOpacity = 0.1;
+  const maxEval = 1; // Adjust this value based on what you consider a significant advantage
+
+  const opacity = Math.min(Math.abs(evaluation) / maxEval, 1) * (maxOpacity - minOpacity) + minOpacity;
+  
+  if (evaluation > 0) {
+    return `rgba(0, 255, 0, ${opacity})`; // Green for positive evaluations
+  } else {
+    return `rgba(255, 0, 0, ${opacity})`; // Red for negative evaluations
+  }
+};
 
 const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
   const [game, setGame] = useState(new Chess());
@@ -119,28 +136,49 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
     }
   };
 
-  const onSquareClick = (square) => {
+  const onSquareClick = async (square) => {
     const moves = game.moves({ square: square, verbose: true });
     console.log('Possible moves:', moves);
 
-    const newPossibleMoves = {};
-    moves.forEach(move => {
-      newPossibleMoves[move.to] = {
-        background: 'radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)',
-        borderRadius: '50%'
-      };
-    });
+    if (moves.length == 0) {
+      setPossibleMoves({});
+      return;
+    }
 
-    setPossibleMoves(newPossibleMoves);
-    setHighlightedSquares({
-      ...newPossibleMoves,
-      [square]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' }
-    });
+    try {
+      const response = await axios.post('http://localhost:5000/get_evaluation', {
+        fen: game.fen(),
+        square: square,
+        moves: moves
+      });
+
+      const results = response.data;
+
+      const newPossibleMoves = moves.reduce((acc, move, index) => {
+        const evaluation = results[index].eval;
+        acc[move.to] = {
+          backgroundColor: getColorFromEvaluation(evaluation),
+          evaluation: evaluation,
+          reason: results[index].reason
+        };
+        return acc;
+      }, {});
+
+      console.log('Possible moves with evaluations:', newPossibleMoves);
+
+      setPossibleMoves(newPossibleMoves);
+      setHighlightedSquares({
+        ...newPossibleMoves,
+        [square]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' }
+      });
+    } catch (error) {
+      console.error('Error fetching evaluation:', error);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center gap-16">
-      <button onClick={() => setOpenedChessGameChat(null)} className="bg-blue-500 text-white px-4 py-2 rounded-md absolute top-10 left-10">Go Back</button>
+      <button onClick={() => setOpenedChessGameChat(null)} className="text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center"><FaArrowLeft /> Go Back</button>
       <div className="flex flex-col gap-4">
         <div className={`${boardOrientation === 'white' ? 'bottom-0' : 'top-0'} left-0 bg-opacity-50 w-fit text-white`}>
         {boardOrientation === 'white' ? `${pgn.white} (${pgn.whiteElo})` : `${pgn.black} (${pgn.blackElo})`}
@@ -150,9 +188,31 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
           <Chessboard 
             position={game.fen()} 
             boardOrientation={boardOrientation} 
-            customSquareStyles={{...highlightedSquares, ...possibleMoves}}
             onSquareClick={onSquareClick}
+            customSquareStyles={{
+              ...highlightedSquares,
+              ...possibleMoves
+            }}
           />
+          <div className="absolute top-0 left-0 w-full h-full grid grid-cols-8 grid-rows-8 pointer-events-none">
+            {Object.entries(possibleMoves).map(([square, data]) => (
+              <div 
+                key={square} 
+                className="relative"
+                style={{
+                  gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
+                }}
+              >
+                <div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer group"
+                >
+                  <div className="opacity-0 group-hover:opacity-100 pointer-events-none bg-black text-white p-2 w-96 rounded absolute bottom-full left-1/2 transform -translate-x-1/2 transition-opacity duration-200 z-10">
+                    {data.reason}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
           {isGameOver && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
               <div className="text-white text-4xl w-3/4 font-bold flex">
