@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const ChessGame = () => {
     const [puzzles, setPuzzles] = useState([]);
@@ -10,7 +12,13 @@ const ChessGame = () => {
     const [message, setMessage] = useState('');
     const [moveHistory, setMoveHistory] = useState([]);
     const [userColor, setUserColor] = useState('w');
+    const [isLoaded, setIsLoaded] = useState(false);
+    const navigate = useNavigate();
     const username = localStorage.getItem('username');
+
+    useEffect(() => {
+        setTimeout(() => setIsLoaded(true), 100);
+    }, []);
 
     const fetchTrainingData = async () => {
         try {
@@ -136,28 +144,36 @@ const ChessGame = () => {
     }, [currentPuzzleIndex, puzzles]);
 
     if (!game) {
-        return <div>Loading...</div>;
+        return <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>Loading...</div>;
     }
 
     return (
-        <div className="chess-game">
-            <Chessboard
-                position={game.fen()}
-                boardOrientation={userColor === 'w' ? 'white' : 'black'}
-                onPieceDrop={(sourceSquare, targetSquare) => {
-                    if (game.turn() !== userColor) return false; // Prevent moves when it's not the user's turn
-                    const move = `${sourceSquare}${targetSquare}`;
-                    handleMove(move);
-                    return true;
-                }}
-            />
-            <div className="message">{message}</div>
-            <div className="controls">
-                <button onClick={prevPuzzle}>Previous</button>
-                <button onClick={nextPuzzle}>Next</button>
-                <button onClick={resetGame}>Reset</button>
+        <div className="chess-game flex flex-col items-center justify-center gap-8 py-16">
+            <button onClick={() => navigate('/choose')} className={`text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '300ms' }}>
+                <FaArrowLeft /> Go Back
+            </button>
+            <h1 className={`text-5xl font-bold text-white transition-transform duration-700 ${isLoaded ? 'translate-y-0' : 'translate-y-10'}`}>
+                Train with <span className="animate-text bg-gradient-to-br from-lime-500 to-teal-500 bg-clip-text text-transparent">Puzzles</span>
+            </h1>
+            <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
+                <Chessboard
+                    position={game.fen()}
+                    boardOrientation={userColor === 'w' ? 'white' : 'black'}
+                    onPieceDrop={(sourceSquare, targetSquare) => {
+                        if (game.turn() !== userColor) return false;
+                        const move = `${sourceSquare}${targetSquare}`;
+                        handleMove(move);
+                        return true;
+                    }}
+                />
             </div>
-            <div className="info">
+            <div className={`message text-white text-xl transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '300ms' }}>{message}</div>
+            <div className={`controls flex gap-4 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '400ms' }}>
+                <button onClick={prevPuzzle} className="bg-blue-500 text-white px-4 py-2 rounded">Previous</button>
+                <button onClick={nextPuzzle} className="bg-blue-500 text-white px-4 py-2 rounded">Next</button>
+                <button onClick={resetGame} className="bg-yellow-500 text-white px-4 py-2 rounded">Reset</button>
+            </div>
+            <div className={`info text-white transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '500ms' }}>
                 <p>Puzzle: {currentPuzzleIndex + 1} / {puzzles.length}</p>
                 <p>Move: {currentMoveIndex + 1} / {puzzles[currentPuzzleIndex]?.moves.length}</p>
                 <p>You are playing as: {userColor === 'w' ? 'White' : 'Black'}</p>

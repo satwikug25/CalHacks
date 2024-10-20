@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chess } from 'chess.js';
 import { Chessboard } from "react-chessboard";
@@ -8,18 +8,15 @@ import PropTypes from 'prop-types';
 
 const Search = ({ setOpenedChessGameChat }) => {
   const navigate = useNavigate();
-  // const [game, setGame] = useState(new Chess());
-  // const [currentMoveIndex, setCurrentMoveIndex] = useState(0);
   const [games, setGames] = useState([]);
   const [query, setQuery] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
-  
-  // const resetGame = () => {
-  //   console.log('Resetting game');
-  //   setGame(new Chess());
-  //   setCurrentMoveIndex(0);
-  // };
+  const [loading, setLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
 
   const handleSearchCall = async () => {
     if (!query) return;
@@ -147,29 +144,33 @@ const Search = ({ setOpenedChessGameChat }) => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-14 py-16">
-      <button onClick={() => navigate('/choose')} className="text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center"><FaArrowLeft /> Go Back</button>
-      <div className="flex flex-col gap-8">
-        <h1 className="text-5xl font-bold text-white"><span className="animate-text bg-gradient-to-br from-lime-500 to-teal-500 bg-clip-text text-transparent">Search</span> for Chess Games</h1>
+      <button onClick={() => navigate('/choose')} className={`text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '300ms' }}>
+        <FaArrowLeft /> Go Back
+      </button>
+      <div className={`flex flex-col gap-8 transition-transform duration-700 ${isLoaded ? 'translate-y-0' : 'translate-y-10'}`}>
+        <h1 className="text-5xl font-bold text-white">
+          <span className="animate-text bg-gradient-to-br from-lime-500 to-teal-500 bg-clip-text text-transparent">Search</span> for Chess Games
+        </h1>
         <div className="w-full flex flex-row items-center justify-center gap-2">
           <input
-          type="text"
-          placeholder="Search for games (e.g., '5 results for Sicilian Defense')"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-[500px] rounded-md px-4 py-3 bg-neutral-800"
-        />
-        <button onClick={handleSearchCall} className="bg-gradient-to-br from-lime-600 to-teal-600 text-white rounded-md px-4 py-2">Search</button>
+            type="text"
+            placeholder="Search for games (e.g., '5 results for Sicilian Defense')"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-[500px] rounded-md px-4 py-3 bg-neutral-800"
+          />
+          <button onClick={handleSearchCall} className="bg-gradient-to-br from-lime-600 to-teal-600 text-white rounded-md px-4 py-2">Search</button>
         </div>
       </div>
 
-      {loading ? ( // Show shimmer boxes while loading
-        <div className="flex flex-wrap justify-center gap-6">
+      {loading ? (
+        <div className={`flex flex-wrap justify-center gap-6 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
           {Array.from({ length: 3 }).map((_, index) => (
             <div key={index} className="bg-neutral-800 p-4 rounded-lg animate-pulse w-[300px] h-[400px]" />
           ))}
         </div>
       ) : games.length > 0 ? (
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className={`flex flex-wrap justify-center gap-6 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
           {games.map((game, index) => (
             <div key={index} >
               <div className="flex flex-col gap-2 bg-neutral-800 p-4 rounded-t-lg">
@@ -208,7 +209,9 @@ const Search = ({ setOpenedChessGameChat }) => {
           ))}
         </div>
       ) : hasSearched && (
-        <p>No games found matching your query.</p>
+        <p className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
+          No games found matching your query.
+        </p>
       )}
     </div>
   );

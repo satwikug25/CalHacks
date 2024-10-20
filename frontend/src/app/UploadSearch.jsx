@@ -17,6 +17,11 @@ function UploadSearch() {
     result: '',
     moves: []
   });
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -181,15 +186,15 @@ function UploadSearch() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-white p-8">
-      <button onClick={() => navigate('/choose')} className="text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center">
+      <button onClick={() => navigate('/choose')} className={`text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '300ms' }}>
         <FaArrowLeft /> Go Back
       </button>
       
-      <h1 className="text-5xl font-bold mb-8">
+      <h1 className={`text-5xl font-bold mb-8 transition-transform duration-700 ${isLoaded ? 'translate-y-0' : 'translate-y-10'}`}>
         <span className="animate-text bg-gradient-to-br from-lime-500 to-teal-500 bg-clip-text text-transparent">Upload</span> Chess Games
       </h1>
 
-      <div className="w-full max-w-2xl flex flex-col items-center justify-center">
+      <div className={`w-full max-w-2xl flex flex-col items-center justify-center transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
         <button 
           onClick={toggleUploadMode} 
           className="mb-6 bg-gradient-to-br from-lime-600 to-teal-600 text-white px-4 py-2 rounded-md hover:from-lime-700 hover:to-teal-700 transition-all duration-200 flex items-center justify-center gap-2"
