@@ -55,16 +55,34 @@ const Choose = () => {
         </p>
       </div>
       <div className={`flex gap-4 transition-opacity duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        {['Analyze', 'Train', 'Search', 'Upload'].map((action, index) => (
-          <button
-            key={action}
-            className={`bg-${['lime', 'green', 'emerald', 'teal'][index]}-600 text-white font-medium text-lg px-4 py-2 rounded-md transition-all duration-500 flex items-center gap-2 hover:scale-105`}
-            onClick={[handleAnalyze, handleTrain, handleSearch, handleUpload][index]}
-            style={{ transitionDelay: `${400 + index * 100}ms` }}
-          >
-            {[<FaChessBoard />, <FaPuzzlePiece />, <FaSearch />, <FaUpload />][index]} {action}
-          </button>
-        ))}
+        <button
+          className="bg-lime-600 text-white font-medium text-lg px-4 py-2 rounded-md transition-all duration-500 flex items-center gap-2 hover:bg-lime-700"
+          onClick={handleAnalyze}
+          style={{ transitionDelay: '400ms' }}
+        >
+          <FaChessBoard /> Analyze
+        </button>
+        <button
+          className="bg-green-600 text-white font-medium text-lg px-4 py-2 rounded-md transition-all duration-500 flex items-center gap-2 hover:bg-green-700"
+          onClick={handleTrain}
+          style={{ transitionDelay: '500ms' }}
+        >
+          <FaPuzzlePiece /> Train
+        </button>
+        <button
+          className="bg-emerald-600 text-white font-medium text-lg px-4 py-2 rounded-md transition-all duration-500 flex items-center gap-2 hover:bg-emerald-700"
+          onClick={handleSearch}
+          style={{ transitionDelay: '600ms' }}
+        >
+          <FaSearch /> Search
+        </button>
+        <button
+          className="bg-teal-600 text-white font-medium text-lg px-4 py-2 rounded-md transition-all duration-500 flex items-center gap-2 hover:bg-teal-700"
+          onClick={handleUpload}
+          style={{ transitionDelay: '700ms' }}
+        >
+          <FaUpload /> Upload
+        </button>
       </div>
       <button 
         className={`text-red-400 font-medium rounded-md transition-all duration-500 flex items-center gap-1 hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}

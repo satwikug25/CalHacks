@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 // import './css/Train.css';
 
 const ChessGame = () => {
+    const navigate = useNavigate();
     const [puzzles, setPuzzles] = useState([]);
     const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
     const [game, setGame] = useState(null);
@@ -14,11 +17,12 @@ const ChessGame = () => {
     const [userColor, setUserColor] = useState('w');
     const [isAnimating, setIsAnimating] = useState(false);
     const [moveInput, setMoveInput] = useState('');
+    const [isLoaded, setIsLoaded] = useState(false);
     const username = localStorage.getItem('username');
 
-    // useEffect(() => {
-    //     setTimeout(() => setIsLoaded(true), 100);
-    // }, []);
+    useEffect(() => {
+        setTimeout(() => setIsLoaded(true), 100);
+    }, []);
 
     const fetchTrainingData = async () => {
         try {
@@ -36,7 +40,18 @@ const ChessGame = () => {
 
     useEffect(() => {
         const loadPuzzles = async () => {
-            const fetchedPuzzles = await fetchTrainingData();
+            let fetchedPuzzles = [];
+            const storedPuzzles = localStorage.getItem('chessPuzzles');
+            
+            if (storedPuzzles) {
+                fetchedPuzzles = JSON.parse(storedPuzzles);
+                console.log('Puzzles loaded from local storage');
+            } else {
+                fetchedPuzzles = await fetchTrainingData();
+                localStorage.setItem('chessPuzzles', JSON.stringify(fetchedPuzzles));
+                console.log('Puzzles fetched from server and stored in local storage');
+            }
+            
             setPuzzles(fetchedPuzzles);
             if (fetchedPuzzles.length > 0) {
                 initializeGame(fetchedPuzzles[0]);
@@ -209,45 +224,75 @@ const ChessGame = () => {
     }, [game, userColor, puzzles, currentPuzzleIndex, currentMoveIndex, moveHistory, makeComputerMove, showCongratulations, isAnimating]);
 
     if (!game) {
-        return <div className={`transition-opacity duration-500`}>Loading...</div>;
+        return <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>Loading...</div>;
     }
 
     return (
-        <div className="chess-game-container">
-            <h1 className="chess-game-title">Customized Puzzles</h1>
-            <div className="game-info">
-                <p>Current turn: {game.turn() === 'w' ? 'White' : 'Black'}</p>
-                <p>Puzzle: {currentPuzzleIndex + 1} / {puzzles.length}</p>
+        <div className="flex flex-col items-center justify-center min-h-screen py-16 gap-8">
+            <button onClick={() => navigate('/choose')} className={`text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '300ms' }}>
+                <FaArrowLeft /> Go Back
+            </button>
+            
+            <h1 className={`text-5xl font-bold text-white transition-transform duration-700 ${isLoaded ? 'translate-y-0' : 'translate-y-10'}`}>
+                Customized <span className="animate-text bg-gradient-to-br from-lime-500 to-teal-500 bg-clip-text text-transparent">puzzles</span> for you.
+            </h1>
+            
+            <div className="flex flex-row gap-4 justify-center items-center">
+            <button className="h-40 w-16 justify-center items-center bg-neutral-700 hover:bg-neutral-600 text-white px-4 py-2 rounded-md transition-colors duration-200" onClick={prevPuzzle}>
+                        <FaChevronLeft size={32} />
+                    </button>
+            <div className={`flex flex-col items-center transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '200ms' }}>
+                <div className="flex flex-col justify-center gap-2 text-white px-8 py-6 bg-neutral-800 rounded-t-xl w-full">
+
+                    <h2 className="text-2xl font-semibold">Puzzle: {currentPuzzleIndex + 1} / {puzzles.length}</h2>
+                    {/* <p className="text-white text-lg">{message}</p> */}
+                </div>
+                
+                <div className="w-[480px] relative">
+                    <Chessboard
+                        position={game.fen()}
+                        boardOrientation={userColor === 'w' ? 'white' : 'black'}
+                        onPieceDrop={(sourceSquare, targetSquare) => {
+                            if (isAnimating || game.turn() !== userColor) return false;
+                            const move = `${sourceSquare}${targetSquare}`;
+                            handleMove(move);
+                            return true;
+                        }}
+                    />
+                    {currentMoveIndex >= puzzles[currentPuzzleIndex]?.moves.length && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
+                            <div className="text-center">
+                                <div className="text-5xl mb-4">🎉</div>
+                                <h2 className="text-3xl font-bold text-white mb-2">Congratulations!</h2>
+                                <p className="text-xl text-white">You've solved the puzzle!</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+                
+                <div className="flex flex-col items-center gap-4 bg-neutral-800 rounded-b-xl w-full px-8 py-6">
+                <div className="text-white flex justify-between items-center w-full">
+                <div className="flex flex-row gap-3 justify-end items-end">
+                    <h2 className="text-2xl font-semibold">Move {currentMoveIndex + 1} / {puzzles[currentPuzzleIndex]?.moves.length}</h2>
+                    <h2 className="text-lg text-neutral-300">{game.turn() === 'w' ? 'White' : 'Black'}'s turn</h2>
+                </div>
+                    <button className="bg-red-600 hover:bg-red-700 bg-opacity-75 text-white px-4 py-2 rounded-md transition-colors duration-200" onClick={resetGame}>Reset Puzzle</button>
+                </div>
+                
+                {/* <input
+                    className="bg-neutral-700 text-white px-4 py-2 rounded-md w-64 hidden"
+                    type="text"
+                    placeholder="Enter move (e.g., e2e4)"
+                    value={moveInput}
+                    onChange={(e) => setMoveInput(e.target.value)}
+                    onKeyDown={handleInputKeyDown}
+                /> */}
+                
+                </div>
             </div>
-            <div className="chessboard-wrapper">
-                <Chessboard
-                    position={game.fen()}
-                    boardOrientation={userColor === 'w' ? 'white' : 'black'}
-                    onPieceDrop={(sourceSquare, targetSquare) => {
-                        if (isAnimating || game.turn() !== userColor) return false;
-                        const move = `${sourceSquare}${targetSquare}`;
-                        handleMove(move);
-                        return true;
-                    }}
-                />
-            </div>
-            <div className="message">{message}</div>
-            <div className="button-group">
-                <button className="btn btn-blue" onClick={prevPuzzle}>Previous Puzzle</button>
-                <button className="btn btn-green" onClick={resetGame}>Reset Puzzle</button>
-                <button className="btn btn-blue" onClick={nextPuzzle}>Next Puzzle</button>
-            </div>
-            <input
-                className="move-input"
-                type="text"
-                placeholder="Enter move (e.g., e2e4)"
-                value={moveInput}
-                onChange={(e) => setMoveInput(e.target.value)}
-                onKeyDown={handleInputKeyDown}
-            />
-            <div className="additional-info">
-                <p>Move: {currentMoveIndex + 1} / {puzzles[currentPuzzleIndex]?.moves.length}</p>
-                <p>You are playing as: {userColor === 'w' ? 'White' : 'Black'}</p>
+            <button className="h-40 w-16 justify-center items-center bg-neutral-700 hover:bg-neutral-600 text-white px-4 py-2 rounded-md transition-colors duration-200" onClick={nextPuzzle}>
+                <FaChevronRight size={32} />
+            </button>
             </div>
         </div>
     );
