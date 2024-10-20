@@ -258,7 +258,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
         <div className="bg-neutral-800 p-4 gap-6 flex flex-col-reverse w-80 h-full">
           <div className="flex items-center gap-2 text-sm">
             <input value={question} onChange={(e) => setQuestion(e.target.value)} type="text" placeholder="Ask a question" className="w-full px-4 py-3 text-md outline-none text-white bg-neutral-700 rounded-md" />
-            <button onClick={handleAskQuestion} className="bg-blue-500 text-white px-4 py-2 rounded-md h-full hover:bg-blue-600 transition-all duration-200">Send</button>
+            <button onClick={handleAskQuestion} className="bg-green-500 text-white font-medium px-4 py-2 rounded-md h-full hover:bg-green-600 transition-all duration-200">Send</button>
           </div>
           <div className="text-white text-sm text-left overflow-y-auto flex flex-col gap-2">
             { respondedQuestion && <h2 className="font-bold text-lg">{respondedQuestion}</h2> }

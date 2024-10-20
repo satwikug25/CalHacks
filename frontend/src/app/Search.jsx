@@ -159,6 +159,7 @@ const Search = ({ setOpenedChessGameChat }) => {
             onChange={(e) => setQuery(e.target.value)}
             className="w-[500px] rounded-md px-4 py-3 bg-neutral-800"
           />
+          <button onClick={() => navigate("/upload")} className="px-3.5 py-1.5 border-white border-opacity-50 text-xl border rounded-md flex items-center justify-center cursor-pointer">+</button>
           <button onClick={handleSearchCall} className="bg-gradient-to-br from-lime-600 to-teal-600 text-white rounded-md px-4 py-2">Search</button>
         </div>
       </div>
