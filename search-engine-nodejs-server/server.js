@@ -38,7 +38,7 @@ async function embedText(text) {
 }
 
 async function generateDescription(game) {
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const prompt = `Analyze this chess game and provide a description in the following format:
   "Opening is [opening name], endgame is [endgame description], players are [white player] and [black player], Elo is [white Elo] and [black Elo]."
   Game details:

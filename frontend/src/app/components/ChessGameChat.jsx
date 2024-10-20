@@ -41,7 +41,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
       const newGame = new Chess();
       setGame(newGame);
       setCurrentMoveIndex(-1);
-      setGameResult(pgn.winner ? pgn.winner + " wins because of " + pgn.status : 'Draw');
+      setGameResult(pgn.result ? pgn.result + (pgn.status ? " because of " + pgn.status : "") : 'Draw');
     }
   }, [pgn]);
 
@@ -208,18 +208,40 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
               ...possibleMoves
             }}
           />
-          {loadingMoves.length > 0 && (
+          {(
             <div 
               className="absolute inset-0 grid grid-cols-8 grid-rows-8 pointer-events-none"
             >
-              {loadingMoves.map((square, index) => (
+              {loadingMoves.length > 0 && loadingMoves.map((square, index) => (
                 <div 
                   key={index}
                   className="animate-pulse bg-yellow-500 bg-opacity-40"
                   style={{
                     gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
                   }}
-                />
+                >
+                  <div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer group"
+                >
+                  </div>
+                </div>
+              ))}
+              {Object.entries(possibleMoves).map(([square, data]) => (
+              <div 
+                key={square} 
+                className="relative"
+                style={{
+                  gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
+                }}
+              >
+                <div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer group"
+                >
+                  <div className="opacity-0 group-hover:opacity-100 pointer-events-none bg-black text-white p-2 w-96 rounded absolute bottom-full left-1/2 transform -translate-x-1/2 transition-opacity duration-200 z-10">
+                    {data.reason}
+                  </div>
+                </div>
+              </div>
               ))}
             </div>
           )}
@@ -305,7 +327,7 @@ ChessGameChat.propTypes = {
     black: PropTypes.string,
     whiteElo: PropTypes.number,
     blackElo: PropTypes.number,
-    winner: PropTypes.string,
+    result: PropTypes.string,
     status: PropTypes.string,
     moves: PropTypes.arrayOf(PropTypes.string)
   }),

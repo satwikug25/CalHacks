@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft, FaUpload, FaChessBoard } from 'react-icons/fa';
 
 function UploadSearch() {
+  const navigate = useNavigate();
   const [games, setGames] = useState([]);
   const [currentGameIndex, setCurrentGameIndex] = useState(0);
   const [isFileUpload, setIsFileUpload] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
   const [gameData, setGameData] = useState({
     white: '',
     black: '',
@@ -16,20 +20,17 @@ function UploadSearch() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log('Input changed:', name, value);
     if (name === 'moves') {
       const cleanedMoves = value
-        .replace(/\d+\./g, '')  // Remove move numbers
-        .replace(/\n/g, ' ')    // Replace newlines with spaces
-        .split(/\s+/)           // Split by whitespace
-        .filter(move => move.trim() !== '');  // Remove empty strings
-      console.log("lof", cleanedMoves);
+        .replace(/\d+\./g, '')
+        .replace(/\n/g, ' ')
+        .split(/\s+/)
+        .filter(move => move.trim() !== '');
       setGameData(prevData => ({
         ...prevData,
         'moves': cleanedMoves
       }));
-    } 
-    else {
+    } else {
       setGameData(prevData => ({
         ...prevData,
         [name]: value
@@ -43,12 +44,10 @@ function UploadSearch() {
       alert('Please fill in all required fields before submitting.');
       return;
     }
-    console.log(gameData);
     try {
       const response = await axios.post('http://localhost:8081/upload', gameData);
       if (response.status === 200) {
         alert('Game data uploaded and analyzed successfully!');
-        // Clear form after successful submission
         setGameData({
           white: '',
           black: '',
@@ -152,27 +151,104 @@ function UploadSearch() {
     setIsFileUpload(!isFileUpload);
   };
 
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      handleFileUpload({ target: { files: [files[0]] } });
+    }
+  }, []);
+
   return (
-    <div>
-      <button onClick={toggleUploadMode}>
-        {isFileUpload ? 'Switch to Custom Game' : 'Switch to File Upload'}
+    <div className="flex flex-col items-center justify-center min-h-screen text-white p-8">
+      <button onClick={() => navigate('/choose')} className="text-neutral-500 hover:text-neutral-600 rounded-md absolute top-10 left-10 flex flex-row gap-2 border-none justify-center items-center">
+        <FaArrowLeft /> Go Back
       </button>
-      {isFileUpload ? (
-        <>
-          <input type="file" onChange={handleFileUpload} accept=".txt,.pgn" />
-          <p>Processed games: {currentGameIndex} / {games.length}</p>
-        </>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <input name="white" value={gameData.white} onChange={handleInputChange} placeholder="White Player" required />
-          <input name="black" value={gameData.black} onChange={handleInputChange} placeholder="Black Player" required />
-          <input name="whiteElo" value={gameData.whiteElo} onChange={handleInputChange} placeholder="White Elo" required />
-          <input name="blackElo" value={gameData.blackElo} onChange={handleInputChange} placeholder="Black Elo" required />
-          <input name="result" value={gameData.result} onChange={handleInputChange} placeholder="Result" required />
-          <textarea name="moves" value={gameData.moves.join(' ')} onChange={handleInputChange} placeholder="Moves" required />
-          <button type="submit">Submit Custom Game</button>
-        </form>
-      )}
+      
+      <h1 className="text-5xl font-bold mb-8">
+        <span className="animate-text bg-gradient-to-br from-lime-500 to-teal-500 bg-clip-text text-transparent">Upload</span> Chess Games
+      </h1>
+
+      <div className="w-full max-w-2xl flex flex-col items-center justify-center">
+        <button 
+          onClick={toggleUploadMode} 
+          className="mb-6 bg-gradient-to-br from-lime-600 to-teal-600 text-white px-4 py-2 rounded-md hover:from-lime-700 hover:to-teal-700 transition-all duration-200 flex items-center justify-center gap-2"
+        >
+          {isFileUpload ? <FaChessBoard /> : <FaUpload />}
+          {isFileUpload ? 'Switch to Custom Game' : 'Switch to File Upload'}
+        </button>
+
+        {isFileUpload ? (
+          <div 
+            className={`w-full bg-neutral-800 p-8 rounded-lg border-2 border-dashed ${
+              isDragging ? 'border-blue-500' : 'border-neutral-600'
+            } transition-all duration-200`}
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+            <div className="text-center">
+              <FaUpload className="mx-auto text-4xl mb-4 text-neutral-400" />
+              <p className="text-lg mb-2">Drag and drop your PGN file here</p>
+              <p className="text-sm text-neutral-400 mb-4">or</p>
+              <label className="bg-lime-600 text-white px-4 py-2 rounded-md hover:bg-lime-700 transition-all duration-200 cursor-pointer">
+                Choose File
+                <input 
+                  type="file" 
+                  onChange={handleFileUpload} 
+                  accept=".txt,.pgn"
+                  className="hidden"
+                />
+              </label>
+            </div>
+            {games.length > 0 && (
+              <p className="text-lg mt-4">Processed games: {currentGameIndex} / {games.length}</p>
+            )}
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="bg-neutral-800 p-6 rounded-lg w-full">
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <input name="white" value={gameData.white} onChange={handleInputChange} placeholder="White Player" required className="p-2 bg-neutral-700 rounded-md" />
+              <input name="black" value={gameData.black} onChange={handleInputChange} placeholder="Black Player" required className="p-2 bg-neutral-700 rounded-md" />
+              <input name="whiteElo" value={gameData.whiteElo} onChange={handleInputChange} placeholder="White Elo" required className="p-2 bg-neutral-700 rounded-md" />
+              <input name="blackElo" value={gameData.blackElo} onChange={handleInputChange} placeholder="Black Elo" required className="p-2 bg-neutral-700 rounded-md" />
+              <input name="result" value={gameData.result} onChange={handleInputChange} placeholder="Result" required className="p-2 bg-neutral-700 rounded-md" />
+            </div>
+            <textarea 
+              name="moves" 
+              value={gameData.moves.join(' ')} 
+              onChange={handleInputChange} 
+              placeholder="Moves" 
+              required 
+              className="w-full p-2 bg-neutral-700 rounded-md mb-4 h-32"
+            />
+            <button type="submit" className="bg-lime-600 w-full text-white px-4 py-2 rounded-md hover:bg-lime-700 transition-all duration-200">
+              Submit Custom Game
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
