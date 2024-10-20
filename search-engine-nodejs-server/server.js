@@ -73,26 +73,31 @@ app.post('/upload', async (req, res) => {
 
 app.post('/search', async (req, res) => {
   try {
-    const { query, numResults } = req.body;
+    const { query } = req.body;
     const queryEmbedding = await embedText(query);
+
+    // Extract nResults from the query
+    const nResultsMatch = query.match(/\b(\d+)\s+results?\b/i);
+    const nResults = nResultsMatch ? parseInt(nResultsMatch[1]) : 9;
 
     const results = await collection.query({
       queryEmbeddings: [queryEmbedding],
-      nResults: numResults || 9
+      nResults: nResults
     });
 
     const formattedResults = results.documents[0].map(game => {
       game = JSON.parse(game);
       console.log(game.moves);
       return ({
-      white: game.white,
-      black: game.black,
-      whiteElo: game.whiteElo,
-      blackElo: game.blackElo,
-      result: game.result,
-      moves: game.moves || '',
-      description: game.description
-    })});
+        white: game.white,
+        black: game.black,
+        whiteElo: game.whiteElo,
+        blackElo: game.blackElo,
+        result: game.result,
+        moves: game.moves || '',
+        description: game.description
+      });
+    });
 
     res.json(formattedResults);
   } catch (error) {

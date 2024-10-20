@@ -1,0 +1,528 @@
+[33mWARNING[0m:  [19-10-2024 19:59:44] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048575. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-10-2024 19:59:44] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component System
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component Posthog
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 19:59:44] Starting component SegmentAPI
+[32mINFO[0m:     [19-10-2024 19:59:44] Started server process [[36m80644[0m]
+[32mINFO[0m:     [19-10-2024 19:59:44] Waiting for application startup.
+[32mINFO[0m:     [19-10-2024 19:59:44] Application startup complete.
+[32mINFO[0m:     [19-10-2024 19:59:44] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-10-2024 19:59:49] ::1:58340 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 19:59:49] ::1:58341 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 19:59:49] ::1:58340 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 20:59:49] Shutting down
+[32mINFO[0m:     [19-10-2024 20:59:49] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component System
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component Posthog
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 20:59:49] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-10-2024 20:59:49] Application shutdown complete.
+[32mINFO[0m:     [19-10-2024 20:59:49] Finished server process [[36m80644[0m]
+[33mWARNING[0m:  [19-10-2024 20:59:51] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048575. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-10-2024 20:59:52] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component System
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component Posthog
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 20:59:52] Starting component SegmentAPI
+[32mINFO[0m:     [19-10-2024 20:59:52] Started server process [[36m81295[0m]
+[32mINFO[0m:     [19-10-2024 20:59:52] Waiting for application startup.
+[32mINFO[0m:     [19-10-2024 20:59:52] Application startup complete.
+[32mINFO[0m:     [19-10-2024 20:59:52] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-10-2024 20:59:54] ::1:60876 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 20:59:54] ::1:60877 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 20:59:54] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 20:59:54] ::1:60876 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:00:16] Backing off send_request(...) for 0.0s (requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Read timed out. (read timeout=15))
+[32mINFO[0m:     [19-10-2024 21:00:16] Backing off send_request(...) for 1.7s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1058f7020>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[32mINFO[0m:     [19-10-2024 21:00:17] Backing off send_request(...) for 1.0s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1058f7380>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[31mERROR[0m:    [19-10-2024 21:00:18] Giving up send_request(...) after 4 tries (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1058f7e90>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[32mINFO[0m:     [19-10-2024 21:00:19] Backing off send_request(...) for 0.3s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1059218b0>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[32mINFO[0m:     [19-10-2024 21:00:19] Backing off send_request(...) for 1.7s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1059212e0>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[32mINFO[0m:     [19-10-2024 21:00:21] Backing off send_request(...) for 2.6s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x105921af0>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[31mERROR[0m:    [19-10-2024 21:00:24] Giving up send_request(...) after 4 tries (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1059211c0>: Failed to resolve 'us.i.posthog.com' ([Errno 8] nodename nor servname provided, or not known)")))
+[32mINFO[0m:     [19-10-2024 21:01:03] ::1:60927 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:01:21] ::1:60950 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:01:25] ::1:60950 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:01:30] Shutting down
+[32mINFO[0m:     [19-10-2024 21:01:30] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component System
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component Posthog
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 21:01:30] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-10-2024 21:01:30] Application shutdown complete.
+[32mINFO[0m:     [19-10-2024 21:01:30] Finished server process [[36m81295[0m]
+[33mWARNING[0m:  [19-10-2024 21:01:39] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048575. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-10-2024 21:01:39] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component System
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component Posthog
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 21:01:39] Starting component SegmentAPI
+[32mINFO[0m:     [19-10-2024 21:01:39] Started server process [[36m81408[0m]
+[32mINFO[0m:     [19-10-2024 21:01:39] Waiting for application startup.
+[32mINFO[0m:     [19-10-2024 21:01:39] Application startup complete.
+[32mINFO[0m:     [19-10-2024 21:01:39] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-10-2024 21:01:42] ::1:60966 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:01:42] ::1:60967 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:01:42] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:01:42] ::1:60966 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:02:14] ::1:60987 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:12] ::1:61113 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:21] ::1:61128 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:21] ::1:61128 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:31] ::1:61141 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:40] ::1:61162 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:40] ::1:61162 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:40] ::1:61162 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:40] ::1:61162 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:03:41] ::1:61162 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:04:00] ::1:61172 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:04:16] ::1:61197 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:04:25] ::1:61200 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:04:25] ::1:61200 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:04:25] ::1:61200 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:05:10] ::1:61219 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:05:30] ::1:61232 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:05:30] ::1:61232 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:05:30] ::1:61235 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:05:30] ::1:61235 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:05:30] ::1:61232 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:07:29] ::1:61295 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:07:29] ::1:61295 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:07:30] ::1:61295 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:09:37] ::1:61339 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:09:37] ::1:61340 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:09:37] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:09:37] ::1:61339 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:09:42] Shutting down
+[32mINFO[0m:     [19-10-2024 21:09:42] Waiting for application shutdown.
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component System
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component SegmentAPI
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component Posthog
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 21:09:42] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [19-10-2024 21:09:42] Application shutdown complete.
+[32mINFO[0m:     [19-10-2024 21:09:42] Finished server process [[36m81408[0m]
+[33mWARNING[0m:  [19-10-2024 21:09:48] chroma_server_nofile is set to 65535, but this is less than current soft limit of 1048575. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-10-2024 21:09:48] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component System
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component SqliteDB
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component Posthog
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component LocalExecutor
+[36mDEBUG[0m:    [19-10-2024 21:09:48] Starting component SegmentAPI
+[32mINFO[0m:     [19-10-2024 21:09:48] Started server process [[36m81624[0m]
+[32mINFO[0m:     [19-10-2024 21:09:48] Waiting for application startup.
+[32mINFO[0m:     [19-10-2024 21:09:48] Application startup complete.
+[32mINFO[0m:     [19-10-2024 21:09:48] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [19-10-2024 21:10:11] ::1:61407 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:10:34] Starting component PersistentLocalHnswSegment
+[32mINFO[0m:     [19-10-2024 21:10:34] ::1:61434 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:10:49] Number of requested results 9 is greater than number of elements in index 1, updating n_results = 1
+[32mINFO[0m:     [19-10-2024 21:10:49] ::1:61442 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[33mWARNING[0m:  [19-10-2024 21:10:56] Number of requested results 9 is greater than number of elements in index 1, updating n_results = 1
+[32mINFO[0m:     [19-10-2024 21:10:56] ::1:61445 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:11:51] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:51] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:51] ::1:61507 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:52] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:52] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:52] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:53] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:53] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:53] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:54] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:54] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:54] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61591 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:11:55] Add of existing embedding ID: 1729397515681
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61593 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:11:55] Insert of existing embedding ID: 1729397515681
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61592 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61595 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:11:55] Add of existing embedding ID: 1729397515680
+[33mWARNING[0m:  [19-10-2024 21:11:55] Insert of existing embedding ID: 1729397515680
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61590 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61597 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61586 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61589 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61596 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61507 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61587 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:11:55] Add of existing embedding ID: 1729397515682
+[33mWARNING[0m:  [19-10-2024 21:11:55] Insert of existing embedding ID: 1729397515682
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61594 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:11:55] Add of existing embedding ID: 1729397515678
+[33mWARNING[0m:  [19-10-2024 21:11:55] Insert of existing embedding ID: 1729397515678
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61588 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61507 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:11:55] Add of existing embedding ID: 1729397515824
+[33mWARNING[0m:  [19-10-2024 21:11:55] Insert of existing embedding ID: 1729397515824
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61586 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61507 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61586 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61506 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61507 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61586 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61587 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:55] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 21:11:56] ::1:61505 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 21:12:01] Number of requested results 50 is greater than number of elements in index 44, updating n_results = 44
+[32mINFO[0m:     [19-10-2024 21:12:01] ::1:61601 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:12:27] ::1:61613 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[33mWARNING[0m:  [19-10-2024 21:13:35] Number of requested results 50 is greater than number of elements in index 44, updating n_results = 44
+[32mINFO[0m:     [19-10-2024 21:13:35] ::1:61642 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:25:21] ::1:62160 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:25:41] ::1:62203 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:25:41] ::1:62203 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:26:00] ::1:62209 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:26:04] ::1:62209 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:26:14] ::1:62218 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:26:15] ::1:62218 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:26:15] ::1:62218 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:26:17] ::1:62218 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:28:26] ::1:62317 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:28:26] ::1:62318 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:28:26] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:28:26] ::1:62317 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:31:07] ::1:62583 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:31:07] ::1:62584 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:31:07] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:31:07] ::1:62583 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:31:51] ::1:62746 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:32:12] ::1:62785 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:32:12] ::1:62786 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:32:12] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:32:12] ::1:62785 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:32:18] ::1:62788 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:32:18] ::1:62789 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:32:18] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:32:18] ::1:62788 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:32:43] ::1:62834 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:33:29] ::1:62892 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:33:34] ::1:62896 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:33:58] ::1:62906 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:34:08] ::1:62913 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:34:14] ::1:62926 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:34:25] ::1:62940 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:35:35] ::1:62948 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:37:49] ::1:63038 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:37:58] ::1:63045 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:38:08] ::1:63053 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:38:08] ::1:63054 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:39:35] ::1:63313 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:39:37] ::1:63313 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:01] ::1:63608 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:10] ::1:63625 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:16] ::1:63627 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:21] ::1:63630 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:22] ::1:63630 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:24] ::1:63630 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:32] ::1:63635 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:42:44] ::1:63638 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:45:11] ::1:63730 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:47:35] ::1:63767 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:47:44] ::1:63770 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:47:48] ::1:63770 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:48:43] ::1:63784 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:50:09] ::1:64157 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:52:39] ::1:64851 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:53:32] ::1:65068 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:53:45] ::1:65127 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:55:33] ::1:49307 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:55:33] ::1:49308 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:55:33] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:55:33] ::1:49307 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:55:46] ::1:49366 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:56:24] ::1:49524 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:56:24] ::1:49525 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 21:56:24] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 21:56:24] ::1:49524 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:56:31] ::1:49556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:56:57] ::1:49666 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:58:01] ::1:49927 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 21:59:03] ::1:50199 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:01:07] ::1:50710 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:01:07] ::1:50711 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:01:07] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:01:07] ::1:50710 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:01:12] ::1:50730 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:01:12] ::1:50731 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:01:12] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:01:12] ::1:50730 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:01:18] ::1:50764 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:04:49] ::1:51776 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:04:49] ::1:51777 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:04:49] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:04:49] ::1:51776 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:04:53] ::1:51776 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:05:09] ::1:51868 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:06:48] ::1:52273 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:07:39] ::1:52490 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:07:39] ::1:52491 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:07:39] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:07:39] ::1:52490 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:08:58] ::1:52835 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:08:58] ::1:52836 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:08:58] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:08:58] ::1:52835 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:09:11] ::1:52892 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:10:17] ::1:53178 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:10:27] ::1:53221 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:10:27] ::1:53222 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:10:27] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:10:27] ::1:53221 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:10:29] ::1:53221 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:11:34] ::1:53535 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:11:34] ::1:53536 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:11:34] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:11:34] ::1:53535 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:11:38] ::1:53535 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:11:46] ::1:53593 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:12:02] ::1:53698 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:12:31] ::1:53820 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:12:31] ::1:53821 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:12:31] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:12:31] ::1:53820 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:12:37] ::1:53855 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:14:29] ::1:54353 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:15:35] ::1:54666 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:05] ::1:54797 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:05] ::1:54798 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:16:05] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:16:05] ::1:54797 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:12] ::1:54838 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:12] ::1:54839 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:16:12] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:16:12] ::1:54838 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:12] ::1:54844 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:12] ::1:54845 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:16:12] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:16:12] ::1:54844 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:17] ::1:54863 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:17] ::1:54864 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:16:17] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:16:17] ::1:54863 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:16:26] ::1:54912 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:17:31] ::1:55187 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:17:31] ::1:55188 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:17:31] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:17:31] ::1:55187 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:17:33] ::1:55187 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:18:52] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:52] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:52] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:53] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:53] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:53] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:54] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:54] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:54] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:54] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:55] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:56] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:56] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:56] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:56] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:57] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:57] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:57] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:57] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:58] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:59] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:18:59] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:00] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:00] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:00] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:00] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:01] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:01] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:01] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:01] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:01] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:02] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:02] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:03] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:03] ::1:55598 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:03] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:03] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:04] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:05] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:05] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:05] ::1:55598 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:05] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:05] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:06] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:07] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:07] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:08] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:08] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:08] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:08] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:09] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:09] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:10] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:10] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:10] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:10] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:11] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:11] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:11] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:11] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:11] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:11] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:12] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:13] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:13] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:13] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 22:19:13] Add of existing embedding ID: 1729401553679
+[33mWARNING[0m:  [19-10-2024 22:19:13] Insert of existing embedding ID: 1729401553679
+[32mINFO[0m:     [19-10-2024 22:19:13] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:13] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55716 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55716 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 22:19:14] Add of existing embedding ID: 1729401554502
+[33mWARNING[0m:  [19-10-2024 22:19:14] Insert of existing embedding ID: 1729401554502
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55716 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:14] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55716 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 22:19:15] Add of existing embedding ID: 1729401555442
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55723 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[33mWARNING[0m:  [19-10-2024 22:19:15] Insert of existing embedding ID: 1729401555442
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55724 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55725 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55718 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55717 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55716 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55557 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:15] ::1:55556 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/add HTTP/1.1" 201
+[32mINFO[0m:     [19-10-2024 22:19:23] ::1:55762 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:20:10] ::1:55957 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:02] ::1:56185 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:02] ::1:56186 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:21:02] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:21:02] ::1:56185 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:05] ::1:56200 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:05] ::1:56201 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:21:05] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:21:05] ::1:56200 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:07] ::1:56210 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:07] ::1:56211 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:21:07] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:21:07] ::1:56210 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:21:11] ::1:56210 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:22:04] ::1:56450 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:22:05] ::1:56450 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:22:32] ::1:56569 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:11] ::1:56980 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:11] ::1:56981 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:11] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:11] ::1:56980 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:14] ::1:56991 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:14] ::1:56992 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:14] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:14] ::1:56991 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:23] ::1:57037 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:23] ::1:57038 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:23] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:23] ::1:57037 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:26] ::1:57055 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:26] ::1:57056 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:26] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:26] ::1:57055 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:34] ::1:57088 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:34] ::1:57093 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:34] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:34] ::1:57088 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:36] ::1:57098 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:36] ::1:57099 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:36] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:36] ::1:57098 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:38] ::1:57117 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:38] ::1:57118 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:38] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:38] ::1:57117 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:43] ::1:57137 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:43] ::1:57138 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:43] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:43] ::1:57137 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:48] ::1:57165 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:48] ::1:57166 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:48] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:48] ::1:57165 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:55] ::1:57196 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:24:55] ::1:57197 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:24:55] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:24:55] ::1:57196 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:25:07] ::1:57256 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:25:07] ::1:57257 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:25:07] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:25:07] ::1:57256 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:25:15] ::1:57293 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:25:15] ::1:57298 - "GET /api/v1/databases/default_database?tenant=default_tenant HTTP/1.1" 200
+[36mDEBUG[0m:    [19-10-2024 22:25:15] Collection chess_games already exists, returning existing collection.
+[32mINFO[0m:     [19-10-2024 22:25:15] ::1:57293 - "POST /api/v1/collections?tenant=default_tenant&database=default_database HTTP/1.1" 200
+[32mINFO[0m:     [19-10-2024 22:26:23] ::1:57596 - "POST /api/v1/collections/e14d8cc6-9132-477e-9833-877d5f629736/query HTTP/1.1" 200
