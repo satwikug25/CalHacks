@@ -34,6 +34,7 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
   const [gameResult, setGameResult] = useState('');
   const [highlightedSquares, setHighlightedSquares] = useState({});
   const [possibleMoves, setPossibleMoves] = useState({});
+  const [loadingMoves, setLoadingMoves] = useState([]);
 
   useEffect(() => {
     if (pgn && pgn.moves) {
@@ -147,31 +148,33 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
       return;
     }
 
+    setLoadingMoves(moves.map(move => move.to));
+
     try {
-        let results = JSON.parse(localStorage.getItem(`${game.fen()}-${square}`));
+      let results = JSON.parse(localStorage.getItem(`${game.fen()}-${square}`));
 
-        if (!results) {
-            const response = await axios.post('http://localhost:5000/get_evaluation', {
-                fen: game.fen(),
-                square: square,
-                moves: moves
-            });
+      if (!results) {
+        const response = await axios.post('http://localhost:5000/get_evaluation', {
+          fen: game.fen(),
+          square: square,
+          moves: moves
+        });
       
-            results = response.data;
-            localStorage.setItem(`${game.fen()}-${square}`, JSON.stringify(results));
-        }
+        results = response.data;
+        localStorage.setItem(`${game.fen()}-${square}`, JSON.stringify(results));
+      }
 
-        console.log(results);
+      console.log(results);
 
-        const newPossibleMoves = moves.reduce((acc, move, index) => {
-                const evaluation = results[index].eval;
-                acc[move.to] = {
-                backgroundColor: getColorFromEvaluation(evaluation),
-                evaluation: evaluation,
-                reason: results[index].reason
-            };
-            return acc;
-        }, {});
+      const newPossibleMoves = moves.reduce((acc, move, index) => {
+        const evaluation = results[index].eval;
+        acc[move.to] = {
+          backgroundColor: getColorFromEvaluation(evaluation),
+          evaluation: evaluation,
+          reason: results[index].reason
+        };
+        return acc;
+      }, {});
 
       console.log('Possible moves with evaluations:', newPossibleMoves);
 
@@ -182,6 +185,8 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
       });
     } catch (error) {
       console.error('Error fetching evaluation:', error);
+    } finally {
+      setLoadingMoves([]);
     }
   };
 
@@ -203,25 +208,21 @@ const ChessGameChat = ({ pgn, setOpenedChessGameChat }) => {
               ...possibleMoves
             }}
           />
-          <div className="absolute top-0 left-0 w-full h-full grid grid-cols-8 grid-rows-8 pointer-events-none">
-            {Object.entries(possibleMoves).map(([square, data]) => (
-              <div 
-                key={square} 
-                className="relative"
-                style={{
-                  gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
-                }}
-              >
+          {loadingMoves.length > 0 && (
+            <div 
+              className="absolute inset-0 grid grid-cols-8 grid-rows-8 pointer-events-none"
+            >
+              {loadingMoves.map((square, index) => (
                 <div 
-                  className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer group"
-                >
-                  <div className="opacity-0 group-hover:opacity-100 pointer-events-none bg-black text-white p-2 w-96 rounded absolute bottom-full left-1/2 transform -translate-x-1/2 transition-opacity duration-200 z-10">
-                    {data.reason}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                  key={index}
+                  className="animate-pulse bg-yellow-500 bg-opacity-40"
+                  style={{
+                    gridArea: `${9 - parseInt(square[1])} / ${square.charCodeAt(0) - 96} / span 1 / span 1`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
           {isGameOver && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
               <div className="text-white text-4xl w-3/4 font-bold flex justify-center gap-3">

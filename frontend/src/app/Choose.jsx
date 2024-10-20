@@ -1,6 +1,5 @@
-import React,{useEffect} from 'react';
-import { useNavigate, Link , useLocation} from 'react-router-dom';
-import './css/Choose.css';
+import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Choose = () => {
   const navigate = useNavigate();
@@ -31,19 +30,19 @@ const Choose = () => {
   }, [location, navigate]);
 
   return (
-    <div className="container">
-      <h1>Choose an Option</h1>
-      <div className="buttonContainer">
-        <button className="button" onClick={handleAnalyze}>
+    <div className="flex flex-col gap-8 justify-center items-center">
+      <h1 className="text-5xl font-bold text-white">Choose an Option</h1>
+      <div className="flex gap-4">
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-200" onClick={handleAnalyze}>
           Analyze
         </button>
-        <button className="button" onClick={handleTrain}>
+        <button className="bg-rose-500 text-white px-4 py-2 rounded-md hover:bg-rose-600 transition-all duration-200" onClick={handleTrain}>
           Train
         </button>
-        <button className="button" onClick={handleSearch}>
+        <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all duration-200" onClick={handleSearch}>
           Search
         </button>
-        <button className="button" onClick={handleUpload}>
+        <button className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition-all duration-200" onClick={handleUpload}>
           Upload
         </button>
 

@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
-import './css/Train.css';
 
 const ChessGame = () => {
     const [puzzles, setPuzzles] = useState([]);
