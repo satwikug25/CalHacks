@@ -1,4 +1,4 @@
 .env
 node_modules/
-chrome.log
+chroma.log
 getting-started/
