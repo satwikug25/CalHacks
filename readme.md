@@ -1,11 +1,35 @@
-## CalHacks
-##  
+# This project was made for CalHacks 2024
 
-{
-    white: "MRSATWIK",
-    black: "knightacer",
-    whiteElo: "1486",
-    blackElo: "1446",
-    result: "0-1",
-    moves: ["e4", "e5", "Nf3", "Nc6", "Bc4", "h6", "Nc3", "d6", "h3", "Nf6", "d3", "Be7", "O-O", "O-O", "Be3", "a6", "Qe2", "b5", "Bb3", "Bb7", "Nd5", "Na5", "Nxe7+", "Qxe7", "c3", "c5", "Bc2", "Rfe8", "b4", "cxb4", "cxb4", "Nc6", "a3", "Bc8", "Bb3", "g5", "Rac1", "Qb7", "Qa2", "Rf8", "Bd5", "Nxd5", "Qxd5", "Ne7", "Qxd6", "Ng6", "Rc7", "Qb8", "Bc5", "Ra7", "Rxa7", "Qxd6", "Bxd6", "Rd8", "Bxe5", "Rxd3", "Rc1", "Bxh3", "gxh3", "Rxf3", "Rc8+", "Kh7", "Kg2", "Nxe5", "Rxa6", "Rf4", "Rc7", "Rxe4", "Re6", "Kg7", "Rce7", "Rg4+", "Kh2", "Nf3+", "Kh1", "Rg1#"]
-  },
+## Overview
+ It is a chess AI tutor that evaluates your lichess games and helps you improve through customized puzzles, using AI to evaluate and understand every move possible.
+
+
+## Installation Guide
+
+1. Clone the repository
+2. Install the dependencies (npm install, pip install)
+3. Run the frontend (npm run dev)
+4. Run the backend (flask --app app run)
+5. Run search backend ( npm start )
+
+## How it works
+- Get customized puzzles based on your lichess games
+- Evaluate your games and give you personalized feedback with AI
+- Upload your games to the database and view them in the website or search for popular games with semantic search
+* Example: "Carlsen, Nakamura, Queens openings"
+
+
+## Results
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/arch.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img1.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img2.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img3.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img4.png?raw=true) 
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img5.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img6.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img7.png?raw=true)
+
+
+
+
+
