@@ -99,7 +99,6 @@ def analyze_and_get_puzzles():
         
         # Extract recommended themes from the analysis
         recommended_themes = json.loads(feedback).get('recommended_themes', [])
-        print("JOKE", recommended_themes)
         
         # Use these themes to fetch puzzles
         puzzles = get_puzzles(recommended_themes)
@@ -324,7 +323,6 @@ def get_puzzles(themes, rating='1500', count='10'):
         'x-rapidapi-host': "chess-puzzles.p.rapidapi.com"
     }
     all_puzzles = []
-    print("JOKE", themes)
 
     for theme in themes:
         querystring = {

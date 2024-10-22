@@ -20,14 +20,14 @@
 
 
 ## Results
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/arch.png?raw=true)
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img1.png?raw=true)
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img2.png?raw=true)
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img3.png?raw=true)
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img4.png?raw=true) 
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img5.png?raw=true)
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img6.png?raw=true)
-![alt text](https://github.com/satwikug25/CalHacks/main/frontend/public/images/img7.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/arch.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img1.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img2.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img3.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img4.png?raw=true) 
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img5.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img6.png?raw=true)
+![alt text](https://github.com/satwikug25/CalHacks/blob/main/frontend/public/images/img7.png?raw=true)
 
 
 
