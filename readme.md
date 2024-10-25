@@ -11,6 +11,16 @@
 3. Run the frontend (npm run dev)
 4. Run the backend (flask --app app run)
 5. Run search backend ( npm start )
+6. Start the Chroma DB with chroma run --path ./getting-started
+
+   Read the docs for more clarification ( https://docs.trychroma.com/getting-started ) 
+
+
+## APIs KEYS 
+- Google Gemini API
+- RAPID CHESS API
+- Llama API
+- Groq API
 
 ## How it works
 - Get customized puzzles based on your lichess games
